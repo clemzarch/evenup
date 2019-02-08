@@ -1,5 +1,8 @@
 # Commands
-``import:eventbrite``
+``php bin/console import:eventbrite``
+
+``php bin/console export:json`` (existe pas encore, voir Issue #1)
+
 # APIs
 ## Mapbox
 ``pk.eyJ1IjoiY2xlbXotc3BhZ2hldHRpIiwiYSI6ImNqcGpobjQ2ZDA1dHMza2xucDhudGZhNWsifQ.PobnKYF8IBNfZLH2a120Jg``
