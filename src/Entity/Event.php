@@ -32,6 +32,11 @@ class Event
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $label;
+	
+	/**
+	* @ORM\Column(type="string", nullable=false)
+	*/
+	private $date;
 
     public function getId(): ?int
     {
@@ -70,6 +75,18 @@ class Event
     public function setLabel(?string $label): self
     {
         $this->label = $label;
+
+        return $this;
+    }
+
+	public function getDate()
+    {
+        return $this->date;
+    }
+	
+    public function setDate($date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

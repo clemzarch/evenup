@@ -10,9 +10,3 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
-
-    invoice.event_listener:
-        class: App\EventListener\InvoiceListener
-        tags:
-        - { name: doctrine.event_listener, event: prePersist }
-        - { name: doctrine.event_listener, event: preUpdate }
