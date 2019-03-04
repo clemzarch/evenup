@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Evenup</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet'>
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+<div id='map'></div>
+<div style="position:fixed">
+    <input type="range" id="date_event" min="0" max="7">
+    <label style="color:#fff;background:#000;font-family:open sans, sans-serif" id="date_label"></label>
+</div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2xlbXotc3BhZ2hldHRpIiwiYSI6ImNqcGpobjQ2ZDA1dHMza2xucDhudGZhNWsifQ.PobnKYF8IBNfZLH2a120Jg';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/clemz-spaghetti/cjqnuhhxz6b9h2smwrg0wmz1j',
+    center: [-120, 50],
+    zoom: 2
+});
+document.getElementById('date_event').addEventListener('mouseup', function(e){
+    let offset = e.target.value;
+    let jour = parseInt((new Date()).getDate()) + parseInt(offset);
+    let MaDate = (new Date()).getFullYear() + '-' + ("0" + ((new Date()).getMonth() + 1)).slice(-2) + '-' + jour;
+    document.getElementById('date_label').innerHTML = MaDate;
+    console.log(MaDate);
+
+    map.addSource('earthquakes', {
+        "type": "geojson",
+        "data": '../output/' + MaDate + '.json'
+    });
+    map.addLayer({
+        "id": "earthquakes-heat",
+        "type": "heatmap",
+        "source": "earthquakes",
+        "maxzoom": 23,
+        "paint": {
+            "heatmap-weight": 1,
+            "heatmap-intensity": 1,
+            "heatmap-opacity": 1,
+            "heatmap-radius": 50,
+            "heatmap-color": [
+                "interpolate",
+                ["linear"],
+                ["heatmap-density"],
+                0, "rgba(0, 0, 255, 0)",
+                0.17, "hsl(0, 60%, 76%)",
+                0.47, "hsla(10, 88%, 55%, 0.68)",
+                1, "hsla(3, 71%, 42%, 0.47)"
+            ]
+        }
+    });
+});
+document.getElementById('date_event').addEventListener('mousedown', function(e) {
+    map.removeLayer('earthquakes-heat');
+    map.removeSource('earthquakes');
+});
+</script>
+</body>
+</html>

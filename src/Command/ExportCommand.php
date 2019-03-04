@@ -27,34 +27,32 @@ class ExportCommand extends ContainerAwareCommand
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-		for($jour = 0; $jour <= 7; $jour++) {
-			$repository = $this->em->getRepository(Event::class);
-			
-			$date_auj = date('Y-m-') . (date('d') + $jour);
-			
-			$events = $repository->findBy(
-				['date' => $date_auj]
-			);
-			
-			$response = '';
-			
-			$c = count($events);
-			
-			foreach($events as $i => $event) {
-				var_dump($event);	
-				$response .= '{ "type": "Feature", "properties": { "id": "'.$event->getId().'", "mag": 2.3, "time": 1507425650893, "felt": null, "tsunami": 0 }, "geometry": { "type": "Point", "coordinates": [ '.$event->getLongitude().', '.$event->getLatitude().' ] } }';
+        for($jour = 0; $jour <= 7; $jour++) { // pour chaque jour a partir d’aujourdhui
 
-				if($i+1 != $c){ // si c'est pas le dernier event, on ecrit avec une virgule
-					$response = $response.', ';
-				}
-			}
-			
-			echo '{"type": "FeatureCollection","crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },"features": ['.$response.']}'; // resultat
+            $date_auj = date('Y-m-') . (date('d') + $jour);
 
-			
-			$out = fopen(__DIR__.'/../../public/output/'.$date_auj.'.json', 'w');
-			fwrite($out, '{"type": "FeatureCollection","crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },"features": ['.$response.']}');// ecriture du resultat
-			fclose($out);
-		}
+            echo $date_auj;
+
+            $repository = $this->em->getRepository(Event::class);
+            $events = $repository->findBy(
+                ['date' => $date_auj]
+            );
+
+            $response = '';
+
+            $c = count($events);
+
+            foreach($events as $i => $event) {
+                $response .= '{ "type": "Feature", "properties": { "id": "'.$event->getId().'", "mag": 2.3, "time": 1507425650893, "felt": null, "tsunami": 0 }, "geometry": { "type": "Point", "coordinates": [ '.$event->getLongitude().', '.$event->getLatitude().' ] } }';
+
+                if($i+1 != $c){ // si c'est pas le dernier event, on ecrit avec une virgule
+                    $response = $response.', ';
+                }
+            }
+
+            $out = fopen(__DIR__.'/../../public/output/'.$date_auj.'.json', 'w');
+            fwrite($out, '{"type": "FeatureCollection","crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },"features": ['.$response.']}');// ecriture du resultat
+            fclose($out);
+        }
     }
 }
