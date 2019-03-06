@@ -17,7 +17,10 @@
     <input type="range" id="date_event" min="0" max="7">
     <label style="color:#fff;background:#000;font-family:open sans, sans-serif" id="date_label"></label>
 </div>
-
+<div id="meteo" style="padding:10px;color:#fff;background:#000;font-family:open sans,sans-serif;position:fixed;right:15px;top:15px">
+</div>
+<div id="temp" style="padding:10px;color:#fff;background:#000;font-family:open sans,sans-serif;font-size:20pt;position:fixed;right:15px;top:50px">
+</div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2xlbXotc3BhZ2hldHRpIiwiYSI6ImNqcGpobjQ2ZDA1dHMza2xucDhudGZhNWsifQ.PobnKYF8IBNfZLH2a120Jg';
 var map = new mapboxgl.Map({
@@ -64,7 +67,7 @@ document.getElementById('date_event').addEventListener('mouseup', function(e){
 		"type": "circle",
 		"source": "earthquakes",
 		"paint": {
-			"circle-radius": 30,
+			"circle-radius": 32,
 			"circle-stroke-color": "white",
 			"circle-stroke-width": 0,
 			"circle-opacity": 0
@@ -78,16 +81,21 @@ document.getElementById('date_event').addEventListener('mousedown', function(e) 
     map.removeSource('earthquakes');
 });
 
-map.on('click', 'earthquakes-point', function (e) {
-	//console.log(e.features[0].geometry.coordinates);
+map.on('click', 'earthquakes-point', function (e) { // TODO filter les meteos qui ne sont pas a 17 heure le jour de MaDate
 	e.features.forEach(function(item) {
-		console.log(item.geometry.coordinates);
-	});
+		const longitude = item.geometry.coordinates[0];
+		const lattitude = item.geometry.coordinates[1];
 	
-  <!-- new mapboxgl.Popup() -->
-	<!-- .setLngLat(e.features[0].geometry.coordinates) -->
-	<!-- .setHTML('<b>DBH:</b> '+ e.features[0].properties.dbh) -->
-	<!-- .addTo(map); -->
+		fetch('http://api.openweathermap.org/data/2.5/forecast?lat='+lattitude+'&lon='+longitude+'&appid=7e39eceace89a2eabd5786d8248a25bd&units=metric&cnt=1')
+		.then((res) => {
+			return res.json();
+		})
+		.then((data) => {
+			console.log(data);
+			document.getElementById('meteo').innerHTML = data.list[0].weather[0].main;
+			document.getElementById('temp').innerHTML = data.list[0].main.temp;
+		});
+	});
 });
 </script>
 </body>
