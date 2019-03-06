@@ -26,6 +26,7 @@ var map = new mapboxgl.Map({
     center: [-120, 50],
     zoom: 2
 });
+
 document.getElementById('date_event').addEventListener('mouseup', function(e){
     let offset = e.target.value;
     let jour = parseInt((new Date()).getDate()) + parseInt(offset);
@@ -41,7 +42,6 @@ document.getElementById('date_event').addEventListener('mouseup', function(e){
         "id": "earthquakes-heat",
         "type": "heatmap",
         "source": "earthquakes",
-        "maxzoom": 23,
         "paint": {
             "heatmap-weight": 1,
             "heatmap-intensity": 1,
@@ -58,10 +58,36 @@ document.getElementById('date_event').addEventListener('mouseup', function(e){
             ]
         }
     });
+
+	map.addLayer({ // les cercles qui servent de hit-box
+		"id": "earthquakes-point",
+		"type": "circle",
+		"source": "earthquakes",
+		"paint": {
+			"circle-radius": 30,
+			"circle-stroke-color": "white",
+			"circle-stroke-width": 0,
+			"circle-opacity": 0
+		}
+	});
 });
+
 document.getElementById('date_event').addEventListener('mousedown', function(e) {
     map.removeLayer('earthquakes-heat');
+    map.removeLayer('earthquakes-point');
     map.removeSource('earthquakes');
+});
+
+map.on('click', 'earthquakes-point', function (e) {
+	//console.log(e.features[0].geometry.coordinates);
+	e.features.forEach(function(item) {
+		console.log(item.geometry.coordinates);
+	});
+	
+  <!-- new mapboxgl.Popup() -->
+	<!-- .setLngLat(e.features[0].geometry.coordinates) -->
+	<!-- .setHTML('<b>DBH:</b> '+ e.features[0].properties.dbh) -->
+	<!-- .addTo(map); -->
 });
 </script>
 </body>

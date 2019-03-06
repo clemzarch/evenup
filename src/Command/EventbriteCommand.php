@@ -42,6 +42,7 @@ class EventbriteCommand extends ContainerAwareCommand
 					->findOneBy(['venue_id' => $venue_id]);
 				
 				if ($result == null) {
+					echo 'event existe pas, ajout en bdd'.PHP_EOL;
 					$EventbriteIDs = new EventBriteIDs();
 					$EventbriteIDs->setVenueId($venue_id);
 					$this->em->persist($EventbriteIDs);
@@ -52,9 +53,9 @@ class EventbriteCommand extends ContainerAwareCommand
 					$event->setLatitude($t->latitude);
 					$event->setDate($date_auj);
 					$this->em->persist($event);
-					$this->em->flush();
 				}
 			}
+			$this->em->flush();
 			echo microtime(true) - $time_start.PHP_EOL;
         }
 	}
