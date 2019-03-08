@@ -11,7 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ExportCommand extends ContainerAwareCommand 
 {
     protected static $defaultName = 'export:json';
-
     private $em;
 
     public function __construct(
@@ -20,10 +19,6 @@ class ExportCommand extends ContainerAwareCommand
     ) {
         parent::__construct($name);
         $this->em = $em;
-    }
-
-    protected function configure() {
-        $this->setDescription('exporte les events en json');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
@@ -43,7 +38,21 @@ class ExportCommand extends ContainerAwareCommand
             $c = count($events);
 
             foreach($events as $i => $event) {
-                $response .= '{ "type":"Feature","properties":{"id":"'.$event->getId().'","mag":2.3,"time":1507425650893,"felt":null,"tsunami":0},"geometry":{"type":"Point","coordinates":['.$event->getLongitude().','.$event->getLatitude().']}}';
+                $response .='	{
+								"type":"Feature",
+								"properties":{
+									"id":"'.$event->getId().'",
+									"type":"concert..."
+								},
+								"geometry":{
+									"type":"Point",
+									"coordinates":
+									[
+									'.$event->getLongitude().',
+									'.$event->getLatitude().'
+									]
+								}
+								}';
 
                 if($i+1 != $c){ // si c'est pas le dernier event, on ecrit avec une virgule
                     $response = $response.', ';
