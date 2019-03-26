@@ -6,22 +6,21 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet'>
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
+    <link href='style.css' rel='stylesheet'>
 </head>
 <body>
 <div id='map'></div>
 <div style="position:fixed">
     <input type="range" id="date_event" min="0" max="7">
-    <label style="color:#fff;background:#000;font-family:open sans, sans-serif" id="date_label"></label>
+    <label id="date_label"></label>
 </div>
 <div id="meteo" style="padding:10px;color:#fff;background:#000;font-family:open sans,sans-serif;position:fixed;right:15px;top:15px">
 </div>
 <div id="temp" style="padding:10px;color:#fff;background:#000;font-family:open sans,sans-serif;font-size:20pt;position:fixed;right:15px;top:50px">
 </div>
 <div id="hum" style="padding:10px;color:#fff;background:#000;font-family:open sans,sans-serif;font-size:18pt;position:fixed;right:15px;top:100px">
+</div>
+<div id="card_container">
 </div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2xlbXotc3BhZ2hldHRpIiwiYSI6ImNqcGpobjQ2ZDA1dHMza2xucDhudGZhNWsifQ.PobnKYF8IBNfZLH2a120Jg';
@@ -32,7 +31,7 @@ var map = new mapboxgl.Map({
     zoom: 5
 });
 
-document.getElementById('date_event').addEventListener('mouseup', function(e){
+document.getElementById('date_event').addEventListener('mouseup', function(e) {
     let offset = e.target.value;
     let jour = parseInt((new Date()).getDate()) + parseInt(offset);
     let MaDate = (new Date()).getFullYear() + '-' + ("0" + ((new Date()).getMonth() + 1)).slice(-2) + '-' + jour;
@@ -52,18 +51,18 @@ document.getElementById('date_event').addEventListener('mouseup', function(e){
             "heatmap-intensity": 1,
             "heatmap-opacity": 1,
             "heatmap-radius": 50,
-            "heatmap-color": [
-                "interpolate",
-                ["linear"],
-                ["heatmap-density"],
-                0, "rgba(0, 0, 255, 0)",
-                0.17, "hsl(0, 60%, 76%)",
-                0.47, "hsla(10, 88%, 55%, 0.68)",
-                1, "hsla(3, 71%, 42%, 0.47)"
-            ]
+            "heatmap-color":
+                [
+                    "interpolate",
+                    ["linear"],
+                    ["heatmap-density"],
+                    0, "hsla(240, 0%, 100%, 0)",
+                    0.17, "hsla(238, 38%, 13%, 0.81)",
+                    0.39, "hsla(285, 100%, 37%, 0.85)",
+                    0.86, "hsla(317, 100%, 83%, 0.59)"
+                ]
         }
     });
-
 	map.addLayer({ // les cercles qui servent de hit-box
 		"id": "earthquakes-point",
 		"type": "circle",
@@ -79,31 +78,43 @@ document.getElementById('date_event').addEventListener('mouseup', function(e){
 	map.on('click', 'earthquakes-point', function (e) { // TODO filter les meteos qui ne sont pas a 17 heure le jour de MaDate
 		if(clicked === false) {
 			clicked = true;
+			document.getElementById('card_container').innerHTML = '';
+			
+			let offset = document.getElementById('date_event').value;
+			let jour = (parseInt((new Date()).getDate()) + parseInt(offset)).toString();
+			
+			let MaDateZero =	(new Date()).getFullYear() + '-' +
+								("0" + ((new Date()).getMonth() + 1)).slice(-2) + '-' +
+								("0" + jour).slice(-2);
 			
 			const longitude = e.features[0].geometry.coordinates[0];
 			const lattitude = e.features[0].geometry.coordinates[1];
 		
+			//	recup la meteo
 			fetch('http://api.openweathermap.org/data/2.5/forecast?lat='+lattitude+'&lon='+longitude+'&appid=7e39eceace89a2eabd5786d8248a25bd&units=metric')
-
-			.then((res) => {
-				return res.json();
-			})
-			.then((data) => {
-				data.list.forEach(function(list_item) {
-					let offset = document.getElementById('date_event').value;
-					let jour = (parseInt((new Date()).getDate()) + parseInt(offset)).toString();
-					
-					let MaDateZero =	(new Date()).getFullYear() + '-' +
-										("0" + ((new Date()).getMonth() + 1)).slice(-2) + '-' +
-										("0" + jour).slice(-2);
-										
-					if(list_item.dt_txt === MaDateZero+' 18:00:00') {
-						console.log(list_item);
-						document.getElementById('meteo').innerHTML = list_item.weather[0].main;
-						document.getElementById('temp').innerHTML = list_item.main.temp;
-						document.getElementById('hum').innerHTML = list_item.main.humidity+'%';				
-					}
+				.then((res) => {
+					return res.json();
+				})
+				.then((data) => {
+					data.list.forEach(function(list_item) {
+						if(list_item.dt_txt === MaDateZero+' 18:00:00') {
+							document.getElementById('meteo').innerHTML = list_item.weather[0].main;
+							document.getElementById('temp').innerHTML = list_item.main.temp+'';
+							document.getElementById('hum').innerHTML = list_item.main.humidity+'%';				
+						}
+					});
 				});
+			
+			// recup les infos de l'event
+			e.features.forEach(function(event_item) {
+				fetch('api/events/'+event_item.properties.id)
+					.then((res) => {
+						return res.json();
+					})
+					.then((data) => {
+						console.log(data.label);
+						document.getElementById('card_container').insertAdjacentHTML('beforeend', '<div class="card"><h1>'+data.label+'</h1>bla bla bla</div>');
+					});
 			});
 		}
 	});

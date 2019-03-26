@@ -1,77 +1,77 @@
 {"type":"FeatureCollection","features":[	{
 								"type":"Feature",
 								"properties":{
-									"id":"6299",
+									"id":"6408",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									3.094943100000023,
-									45.761078800000000
+									0.689681000000064,
+									47.393357900000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6300",
+									"id":"6409",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									1.324884999999995,
-									47.583937400000000
+									0.599000000000000,
+									47.409600000000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6301",
+									"id":"6410",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									4.835658999999964,
-									45.764043000000000
+									-0.409348000000023,
+									46.314757000000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6302",
+									"id":"6411",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									4.842336100000011,
-									45.758737700000000
+									4.823239999999942,
+									45.747030000000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6303",
+									"id":"6412",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									4.842336100000011,
-									45.758737700000000
+									4.839884399999960,
+									45.742177400000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6304",
+									"id":"6413",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -85,351 +85,239 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6305",
+									"id":"6414",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.576579000000038,
-									44.349156000000010
+									-0.496477899999945,
+									47.446309500000010
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6306",
+									"id":"6415",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									4.891719299999977,
-									45.769107100000000
+									1.492936999999984,
+									48.441020300000010
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6307",
+									"id":"6416",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									0.791381000000001,
-									48.209928400000000
+									-0.562204699999938,
+									44.830381800000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6308",
+									"id":"6417",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									0.194773700000042,
-									48.005596000000000
+									-0.572455799999943,
+									44.836590500000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6309",
+									"id":"6418",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									-0.520633999999973,
-									47.487453100000000
+									-0.586899200000062,
+									44.835376200000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6310",
+									"id":"6419",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									0.616362999999979,
-									44.203142000000000
+									2.395245700000032,
+									48.814163900000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6311",
+									"id":"6420",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									-0.579179999999951,
-									44.837789000000000
+									2.337524900000062,
+									48.820352299999990
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6312",
+									"id":"6421",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.501854600000002,
-									48.754077400000000
+									2.371345000000019,
+									48.833921100000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6313",
+									"id":"6422",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.357353900000021,
-									48.797939600000000
+									2.409427000000051,
+									48.835254100000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6314",
+									"id":"6423",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.350877399999945,
-									48.820951300000000
+									2.340758999999935,
+									48.840278000000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6315",
+									"id":"6424",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.221536099999980,
-									48.826766300000000
+									2.318602599999963,
+									48.841323100000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6316",
+									"id":"6425",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.375862399999960,
-									48.836038300000000
+									2.353176999999960,
+									48.841086999999990
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6317",
+									"id":"6426",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.356457999999975,
-									48.840231600000000
+									2.340269700000022,
+									48.845633199999990
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6318",
+									"id":"6427",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.306216899999981,
-									48.849050900000000
+									2.343910700000038,
+									48.848108200000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6319",
+									"id":"6428",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.306216899999981,
-									48.849050900000000
+									2.330512900000031,
+									48.851128400000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6320",
+									"id":"6429",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.423141499999929,
-									48.848475099999990
+									2.346804099999986,
+									48.851392700000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6321",
+									"id":"6430",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.369693600000005,
-									48.850419900000000
-									]
-								}
-								}, 	{
-								"type":"Feature",
-								"properties":{
-									"id":"6322",
-									"type":"concert..."
-								},
-								"geometry":{
-									"type":"Point",
-									"coordinates":
-									[
-									2.352221900000018,
-									48.856614000000000
-									]
-								}
-								}, 	{
-								"type":"Feature",
-								"properties":{
-									"id":"6323",
-									"type":"concert..."
-								},
-								"geometry":{
-									"type":"Point",
-									"coordinates":
-									[
-									2.381922199999963,
-									48.859377300000000
-									]
-								}
-								}, 	{
-								"type":"Feature",
-								"properties":{
-									"id":"6324",
-									"type":"concert..."
-								},
-								"geometry":{
-									"type":"Point",
-									"coordinates":
-									[
-									2.332611899999961,
-									48.869383500000000
-									]
-								}
-								}, 	{
-								"type":"Feature",
-								"properties":{
-									"id":"6325",
-									"type":"concert..."
-								},
-								"geometry":{
-									"type":"Point",
-									"coordinates":
-									[
-									2.332611899999961,
-									48.869383500000000
-									]
-								}
-								}, 	{
-								"type":"Feature",
-								"properties":{
-									"id":"6326",
-									"type":"concert..."
-								},
-								"geometry":{
-									"type":"Point",
-									"coordinates":
-									[
-									2.292604999999981,
-									48.873631000000000
-									]
-								}
-								}, 	{
-								"type":"Feature",
-								"properties":{
-									"id":"6327",
-									"type":"concert..."
-								},
-								"geometry":{
-									"type":"Point",
-									"coordinates":
-									[
-									2.364219800000001,
-									48.878541899999990
-									]
-								}
-								}, 	{
-								"type":"Feature",
-								"properties":{
-									"id":"6328",
-									"type":"concert..."
-								},
-								"geometry":{
-									"type":"Point",
-									"coordinates":
-									[
-									2.333300000000000,
-									48.883900000000000
-									]
-								}
-								}, 	{
-								"type":"Feature",
-								"properties":{
-									"id":"6329",
-									"type":"concert..."
-								},
-								"geometry":{
-									"type":"Point",
-									"coordinates":
-									[
-									2.318551800000023,
-									48.887022400000010
+									2.343897200000015,
+									48.851583000000010
 									]
 								}
 								}]}
