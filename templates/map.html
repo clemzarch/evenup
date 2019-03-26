@@ -13,7 +13,7 @@
 <div id='map'></div>
 <div style="position:fixed">
     <input type="range" id="date_event" min="0" max="7">
-    <label id="date_label"></label>
+	<label id="date_label"></label>
 </div>
 <div id="meteo" style="padding:10px;color:#fff;background:#000;font-family:open sans,sans-serif;position:fixed;right:15px;top:15px">
 </div>
@@ -37,7 +37,6 @@ document.getElementById('date_event').addEventListener('mouseup', function(e) {
     let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
     
     document.getElementById('date_label').innerHTML = MaDate;
-    console.log(MaDate);
 
     map.addSource('earthquakes', {
         "type": "geojson",
@@ -108,7 +107,7 @@ document.getElementById('date_event').addEventListener('mouseup', function(e) {
 			
 			// recup les infos de l'event
 			e.features.forEach(function(event_item) {
-				fetch('api/events/'+event_item.properties.id)
+				fetch('api/events/' + event_item.properties.id)
 					.then((res) => {
 						return res.json();
 					})
