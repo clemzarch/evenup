@@ -24,7 +24,7 @@ class EventbriteCommand extends ContainerAwareCommand
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        for($jour = 0; $jour <= 7; $jour++) { // pour chaque jours a partir d'aujourd'hui
+        for ($jour = 0; $jour <= 7; $jour++) { // pour chaque jours a partir d'aujourd'hui
 			$time_start = microtime(true);
 
             $date_auj = date('Y-m-') . (date('d') + $jour);
@@ -32,7 +32,7 @@ class EventbriteCommand extends ContainerAwareCommand
 
             $d = json_decode(file_get_contents('https://www.eventbriteapi.com/v3/events/search/?location.address=France&sort_by=distance&start_date.range_start='.$date_auj.'T17:00:00&start_date.range_end='.$date_demain.'T07:00:00&include_adult_events=on&token=XOUBJU4Z7YTN5F4TMTGE'));
 
-			for($i = 0; $i < count($d->events) ; $i++) {
+			for($i = 0; $i < count($d->events); $i++) {
 				$venue_id = $d->events[$i]->venue_id;
 
 				$result = $this->getContainer()

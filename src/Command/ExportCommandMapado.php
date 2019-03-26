@@ -7,10 +7,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use DateTime;
+use DatePeriod;
+use DateInterval;
 
-class ExportCommand extends ContainerAwareCommand 
+class ExportCommandMapado extends ContainerAwareCommand 
 {
-    protected static $defaultName = 'export:json';
+    protected static $defaultName = 'export:mapado:json';
     private $em;
 
     public function __construct(
@@ -22,17 +25,21 @@ class ExportCommand extends ContainerAwareCommand
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        for ($jour = 0; $jour <= 7; $jour++) { // pour chaque jour à partir d’aujourdhui
+        $startDate = new \DateTime();
+		$numberOfDays = 7;
 
-            $date_auj = date('Y-m-') . (date('d') + $jour);
-
-            // echo $date_auj;
+		for ($i = 0; $i <= $numberOfDays; $i++) {
+			$time_start = microtime(true);
+			$futureDay = clone $startDate;
+            $futureDay->add(new DateInterval("P{$i}D"));
 
             $repository = $this->em->getRepository(Event::class);
-            $events = $repository->findBy(
-                ['date' => $date_auj]
-            );
-
+            foreach ($futureDay as $items) {
+                $events = $repository->findBy(
+                    ['date' => $items]
+                );
+            
+            
             $response = '';
 
             $c = count($events);
@@ -59,9 +66,10 @@ class ExportCommand extends ContainerAwareCommand
                 }
             }
 
-            $out = fopen(__DIR__.'/../../public/output/'.$date_auj.'.json', 'w');
+            $out = fopen(__DIR__.'/../../public/output/'.$futureDay->format('Y-m-d').'.json', 'w');
             fwrite($out,'{"type": "FeatureCollection","crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },"features": ['.$response.']}');// ecriture du resultat
             fclose($out);
         }
+    }
     }
 }

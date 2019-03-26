@@ -19,21 +19,21 @@ class MapadoIDs
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $venue_id;
+    private $mapado_id;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getVenueId(): ?string
+    public function getMapadoId(): ?string
     {
-        return $this->venue_id;
+        return $this->mapado_id;
     }
 
-    public function setVenueId(string $venue_id): self
+    public function setMapadoId(string $mapado_id): self
     {
-        $this->venue_id = $venue_id;
+        $this->mapado_id = $mapado_id;
 
         return $this;
     }
