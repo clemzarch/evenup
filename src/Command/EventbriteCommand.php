@@ -33,31 +33,6 @@ class EventbriteCommand extends ContainerAwareCommand
 
             $d = json_decode(file_get_contents('https://www.eventbriteapi.com/v3/events/search/?location.address=France&sort_by=distance&start_date.range_start='.$date_auj.'T17:00:00&start_date.range_end='.$date_demain.'T07:00:00&include_adult_events=on&token=XOUBJU4Z7YTN5F4TMTGE'));
 
-<<<<<<< HEAD
-			for($i = 0; $i < count($d->events); $i++) {
-				$venue_id = $d->events[$i]->venue_id;
-
-				$result = $this->getContainer()
-					->get('doctrine')
-					->getRepository(EventbriteIDs::class)
-					->findOneBy(['venue_id' => $venue_id]);
-
-				if ($result == null) {
-					echo 'event existe pas, ajout en bdd'.PHP_EOL;
-					$EventbriteIDs = new EventBriteIDs();
-					$EventbriteIDs->setVenueId($venue_id);
-					$this->em->persist($EventbriteIDs);
-
-					$t = json_decode(file_get_contents('https://www.eventbriteapi.com/v3/venues/'.$venue_id.'/?token=XOUBJU4Z7YTN5F4TMTGE'));
-					$event = new Event();
-					$event->setLongitude($t->longitude);
-					$event->setLatitude($t->latitude);
-					$event->setDate($date_auj);
-					$this->em->persist($event);
-				}
-			}
-			$this->em->flush();
-=======
             for ($i = 0; $i < count($d->events); $i++) {
                 $venue_id = $d->events[$i]->venue_id;
 
@@ -82,7 +57,6 @@ class EventbriteCommand extends ContainerAwareCommand
                 }
             }
             $this->em->flush();
->>>>>>> b198df6a112186daf58762708a63944c473566f1
 			echo microtime(true) - $time_start.PHP_EOL;
         }
 	}

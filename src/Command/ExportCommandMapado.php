@@ -25,20 +25,14 @@ class ExportCommandMapado extends ContainerAwareCommand
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $startDate = new \DateTime();
-		$numberOfDays = 7;
-
-		for ($i = 0; $i <= $numberOfDays; $i++) {
-			$time_start = microtime(true);
-			$futureDay = clone $startDate;
-            $futureDay->add(new DateInterval("P{$i}D"));
+        for ($jour = 0; $jour <= 7; $jour++) {
+			$futureDay = date('Y-m-d', strtotime('+'.$jour.' day'));
 
             $repository = $this->em->getRepository(Event::class);
-            foreach ($futureDay as $items) {
-                $events = $repository->findBy(
-                    ['date' => $items]
-                );
-            
+
+            $events = $repository->findBy(
+                ['date' => $futureDay]
+            );
             
             $response = '';
 
@@ -66,10 +60,9 @@ class ExportCommandMapado extends ContainerAwareCommand
                 }
             }
 
-            $out = fopen(__DIR__.'/../../public/output/'.$futureDay->format('Y-m-d').'.json', 'w');
+            $out = fopen(__DIR__.'/../../public/output/'.$futureDay.'.json', 'w');
             fwrite($out,'{"type": "FeatureCollection","crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },"features": ['.$response.']}');// ecriture du resultat
             fclose($out);
         }
-    }
     }
 }

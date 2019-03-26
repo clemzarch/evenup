@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+
 use DateTime;
 use DatePeriod;
 use DateInterval;
@@ -27,18 +28,13 @@ class MapadoCommand extends ContainerAwareCommand
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-		$startDate = new \DateTime();
-		$numberOfDays = 7;
-
-		for ($i = 0; $i <= $numberOfDays; $i++) {
-			$time_start = microtime(true);
-			$futureDay = clone $startDate;
-			$futureDay->add(new DateInterval("P{$i}D"));
+		for ($jour = 0; $jour <= 7; $jour++) {
+			$futureDay = date('Y-m-d', strtotime('+'.$jour.' days'));
 			
 			$curl = curl_init();
 
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => "https://api.mapado.net/v2/activities?fields=@id,title,shortDate,firstDate,activityType,locale,description,address&itemsPerPage=1000&when=".$futureDay->format('Y-m-d')."&periodOfDay=evening",
+				CURLOPT_URL => "https://api.mapado.net/v2/activities?fields=@id,title,shortDate,nextDate,activityType,locale,description,address&itemsPerPage=400&when=".$futureDay."&periodOfDay=evening",
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => "",
 				CURLOPT_MAXREDIRS => 10,
@@ -60,13 +56,11 @@ class MapadoCommand extends ContainerAwareCommand
 			$mapado_events = json_decode($response, JSON_PRETTY_PRINT);
 
 			for ($i = 0; $i < count($mapado_events['hydra:member']); $i++) {
-				$time_start = microtime(true);
 
-				if ($mapado_events['hydra:member'][$i]['locale'] == 'fr' 
-					&& \date('Y-m', strtotime($mapado_events['hydra:member'][$i]['firstDate'])) == '2019-03') {
+				if ($mapado_events['hydra:member'][$i]['locale'] == 'fr') {
 
 					$mapado_id = $mapado_events['hydra:member'][$i]['@id'];
-					$mapado_date = \date('Y-m-d', strtotime($mapado_events['hydra:member'][$i]['firstDate']));
+					$mapado_date = \date('Y-m-d', strtotime($mapado_events['hydra:member'][$i]['nextDate']));
 
 					$result = $this->getContainer()
 						->get('doctrine')
@@ -93,16 +87,13 @@ class MapadoCommand extends ContainerAwareCommand
 						$event->setActivityType($mapado['hydra:member'][$i]['activityType']);
 						$event->setDescription($mapado['hydra:member'][$i]['description']);
 
-						$this->em->persist($event);
+						$this->em->persist($event);						
 					}
 				}
-
 			}
 		}
 		
 		$this->em->flush();
-
-		echo microtime(true) - $time_start.PHP_EOL;
 
 		curl_close($curl);
 
@@ -111,6 +102,5 @@ class MapadoCommand extends ContainerAwareCommand
 		} else {
 			echo $response;
 		}
-		
 	}
 }
