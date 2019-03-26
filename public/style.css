@@ -1,0 +1,88 @@
+@font-face {
+    font-family: Avenir;
+    src: url(avenir-light.ttf);
+}
+
+body {
+    margin:0;
+    padding:0;
+    font-family: Avenir, sans-serif;
+}
+#map {
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:100%;
+}
+#date_label{
+    color: #fff;
+    font-family: open sans, sans-serif;
+    text-shadow: 0 3px 5px #000;
+    font-size: 18pt;
+    font-weight: 900;
+    position: relative;
+    top: -53pt;
+    left: -45pt;
+}
+body > div:nth-child(2) {
+    width: 100%;
+    bottom: 45pt;
+    left: 0;
+    right: 0;
+    text-align:center;
+}
+#date_event {
+    width: 95%;
+    height: 2px;
+    background: #bbb;
+}
+
+input[type=range]::-moz-range-thumb {
+    box-shadow: 0 5px 15px #0009;
+    border:none;
+    height: 50px;
+    width: 50px;
+    background: linear-gradient(90deg, #a000b6,#d846ca);
+    border-radius: 360px;
+    cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    box-shadow: 0 5px 15px #0009;
+    border:none;
+    height: 50px;
+    width: 50px;
+    background: linear-gradient(90deg, #a000b6,#d846ca);
+    border-radius: 360px;
+    cursor: pointer;
+}
+input[type=range]::-ms-thumb {
+    box-shadow: 0 5px 15px #0009;
+    border:none;
+    height: 50px;
+    width: 50px;
+    background: linear-gradient(90deg, #a000b6,#d846ca);
+    border-radius: 360px;
+    cursor: pointer;
+}
+
+#card_container{
+    position:fixed;
+    bottom:0;
+}
+.card{
+    background: #fff;
+    color:#333;
+    box-shadow: 0 0 10px #0005;
+    padding: 20px;
+    margin: 20px;
+    font-size: 15pt;
+    font-weight: 100;
+    border-radius: 20pt;
+    width: 300pt;
+}
+.card h1{
+    font-family: Avenir Bold,sans-serif;
+    font-size: 20pt;
+    margin: 0;
+}

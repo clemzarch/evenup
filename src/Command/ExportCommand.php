@@ -60,7 +60,7 @@ class ExportCommand extends ContainerAwareCommand
             }
 
             $out = fopen(__DIR__.'/../../public/output/'.$date_auj.'.json', 'w');
-            fwrite($out,'{"type": "FeatureCollection","crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },"features": ['.$response.']}');// ecriture du resultat
+            fwrite($out,'{"type":"FeatureCollection","features":['.$response.']}');// ecriture du resultat
             fclose($out);
         }
     }

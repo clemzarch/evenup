@@ -4,12 +4,13 @@ namespace App\Command;
 
 use App\Entity\Event;
 use App\Entity\EventbriteIDs;
+use App\Repository\EventbriteIDsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class EventbriteCommand extends ContainerAwareCommand
+class EventbriteCommand extends ContainerAwareCommand 
 {
     protected static $defaultName = 'import:eventbrite';
 
@@ -27,11 +28,12 @@ class EventbriteCommand extends ContainerAwareCommand
         for ($jour = 0; $jour <= 7; $jour++) { // pour chaque jours a partir d'aujourd'hui
 			$time_start = microtime(true);
 
-            $date_auj = date('Y-m-') . (date('d') + $jour);
-            $date_demain = date('Y-m-') . (date('d') + $jour + 1);
+            $date_auj = date('Y-m-d', strtotime('+'.$jour.' day'));
+            $date_demain = date('Y-m-d', strtotime('+'.($jour + 1).' day'));
 
             $d = json_decode(file_get_contents('https://www.eventbriteapi.com/v3/events/search/?location.address=France&sort_by=distance&start_date.range_start='.$date_auj.'T17:00:00&start_date.range_end='.$date_demain.'T07:00:00&include_adult_events=on&token=XOUBJU4Z7YTN5F4TMTGE'));
 
+<<<<<<< HEAD
 			for($i = 0; $i < count($d->events); $i++) {
 				$venue_id = $d->events[$i]->venue_id;
 
@@ -55,6 +57,32 @@ class EventbriteCommand extends ContainerAwareCommand
 				}
 			}
 			$this->em->flush();
+=======
+            for ($i = 0; $i < count($d->events); $i++) {
+                $venue_id = $d->events[$i]->venue_id;
+
+                $result = $this->getContainer()
+                    ->get('doctrine')
+                    ->getRepository(EventbriteIDs::class)
+                    ->findOneBy(['venue_id' => $venue_id]);
+
+                if ($result == null) {
+                    $EventbriteIDs = new EventBriteIDs();
+                    $EventbriteIDs->setVenueId($venue_id);
+                    $this->em->persist($EventbriteIDs);
+
+
+                    $t = json_decode(file_get_contents('https://www.eventbriteapi.com/v3/venues/' . $venue_id . '/?token=XOUBJU4Z7YTN5F4TMTGE'));
+                    $event = new Event();
+                    $event->setLongitude($t->longitude);
+                    $event->setLatitude($t->latitude);
+                    $event->setLabel($d->events[$i]->name->text);
+                    $event->setDate($date_auj);
+                    $this->em->persist($event);
+                }
+            }
+            $this->em->flush();
+>>>>>>> b198df6a112186daf58762708a63944c473566f1
 			echo microtime(true) - $time_start.PHP_EOL;
         }
 	}
