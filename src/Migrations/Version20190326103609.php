@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190308142005 extends AbstractMigration
+final class Version20190326103609 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,9 +22,9 @@ final class Version20190308142005 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->addSql('CREATE TABLE event (id INT AUTO_INCREMENT NOT NULL, longitude NUMERIC(20, 15) DEFAULT NULL, latitude NUMERIC(20, 15) DEFAULT NULL, title VARCHAR(255) DEFAULT NULL, date VARCHAR(255) NOT NULL, formatted_address VARCHAR(255) DEFAULT NULL, city VARCHAR(255) DEFAULT NULL, locale VARCHAR(255) DEFAULT NULL, activity_type VARCHAR(255) DEFAULT NULL, description TEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE eventbrite_ids (id INT AUTO_INCREMENT NOT NULL, venue_id INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE mapado_ids (id INT AUTO_INCREMENT NOT NULL, venue_id VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE event ADD formatted_address VARCHAR(255) DEFAULT NULL, ADD city VARCHAR(255) DEFAULT NULL, ADD locale VARCHAR(255) DEFAULT NULL, ADD activity_type VARCHAR(255) DEFAULT NULL, ADD description TEXT DEFAULT NULL, CHANGE label title VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -32,8 +32,8 @@ final class Version20190308142005 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->addSql('DROP TABLE event');
         $this->addSql('DROP TABLE eventbrite_ids');
         $this->addSql('DROP TABLE mapado_ids');
-        $this->addSql('ALTER TABLE event ADD label VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci, DROP title, DROP formatted_address, DROP city, DROP locale, DROP activity_type, DROP description');
     }
 }

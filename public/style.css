@@ -3,6 +3,12 @@
     src: url(avenir-light.ttf);
 }
 
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib,
+a.mapboxgl-ctrl-logo
+{
+	display:none;
+}
+
 body {
     margin:0;
     padding:0;
@@ -69,20 +75,104 @@ input[type=range]::-ms-thumb {
 #card_container{
     position:fixed;
     bottom:0;
+    top:0;
+    overflow:auto;
+	background:#0003;
 }
 .card{
     background: #fff;
-    color:#333;
-    box-shadow: 0 0 10px #0005;
+    color: #2b2c2c;
+    box-shadow: 0 5pt 10pt #0005;
     padding: 20px;
-    margin: 20px;
+    margin: 30px 20px;
     font-size: 15pt;
     font-weight: 100;
-    border-radius: 20pt;
+    border-radius: 17pt;
     width: 300pt;
 }
 .card h1{
     font-family: Avenir Bold,sans-serif;
     font-size: 20pt;
-    margin: 0;
+	margin: -30px 0 0 0;
+}
+
+#close_button {
+    position: relative;
+    font-size: 16pt;
+    color: #cdc9c4;
+    background: #4b4b49;
+    padding: 11px 10px;
+    border-radius: 360px;
+    font-weight: 600;
+    font-family: Font Awesome 5 Free;
+    height: 30pt;
+    box-shadow: 0 3px 6pt #0003;
+    z-index: 1;
+    cursor: pointer;
+    left: 220px;
+    width: 24px;
+    height: 23px;
+    text-align: center;
+    top: 3px;
+	transition-duration:0.2s;
+}
+#close_button:hover {
+	color: #4b4b49;
+	background: #cdc9c4;
+}
+
+#share_button {
+    position: relative;
+    font-size: 18pt;
+    color: #fff;
+    background: #8e00a3;
+    padding: 10px 10px;
+    border-radius: 360px;
+    font-weight: 600;
+    font-family: Font Awesome 5 Free;
+    height: 30pt;
+    box-shadow: 0 3px 6pt #0003;
+    z-index: 1;
+    cursor: pointer;
+    left: 305px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    top: -40px;
+	transition-duration:0.2s;
+}
+#share_button:hover {
+	color:#000;
+	background:#fff;
+}
+
+#like_button {
+    position: relative;
+    font-size: 18pt;
+    color: #cdc9c4;
+    background: #fff;
+    padding: 10px 10px;
+    border-radius: 360px;
+    font-weight: 600;
+    font-family: Font Awesome 5 Free;
+    height: 30pt;
+    box-shadow: 0 3px 6pt #0003;
+    z-index: 1;
+    cursor: pointer;
+    right: -7px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    top: -40px;
+	transition-duration:0.2s;
+}
+#like_button:hover {
+	background:#e71a52;
+	color:#fff;
+}
+
+@media only screen and (max-width:500px) {
+	.card {
+		background:red;
+	}
 }

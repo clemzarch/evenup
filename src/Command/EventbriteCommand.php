@@ -51,7 +51,7 @@ class EventbriteCommand extends ContainerAwareCommand
                     $event = new Event();
                     $event->setLongitude($t->longitude);
                     $event->setLatitude($t->latitude);
-                    $event->setLabel($d->events[$i]->name->text);
+                    $event->setTitle($d->events[$i]->name->text);
                     $event->setDate($date_auj);
                     $this->em->persist($event);
                 }

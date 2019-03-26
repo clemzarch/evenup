@@ -1,7 +1,7 @@
 {"type":"FeatureCollection","features":[	{
 								"type":"Feature",
 								"properties":{
-									"id":"6543",
+									"id":"184",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -15,7 +15,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6544",
+									"id":"185",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -29,7 +29,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6545",
+									"id":"186",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -43,7 +43,35 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6546",
+									"id":"187",
+									"type":"concert..."
+								},
+								"geometry":{
+									"type":"Point",
+									"coordinates":
+									[
+									2.352221900000018,
+									48.856614000000010
+									]
+								}
+								}, 	{
+								"type":"Feature",
+								"properties":{
+									"id":"188",
+									"type":"concert..."
+								},
+								"geometry":{
+									"type":"Point",
+									"coordinates":
+									[
+									2.352221900000018,
+									48.856614000000010
+									]
+								}
+								}, 	{
+								"type":"Feature",
+								"properties":{
+									"id":"189",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -57,21 +85,49 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6547",
+									"id":"190",
 									"type":"concert..."
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-									2.346578000000022,
-									48.870134900000000
+									2.346927599999958,
+									48.870104600000000
 									]
 								}
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6548",
+									"id":"191",
+									"type":"concert..."
+								},
+								"geometry":{
+									"type":"Point",
+									"coordinates":
+									[
+									2.371871699999929,
+									48.872034400000000
+									]
+								}
+								}, 	{
+								"type":"Feature",
+								"properties":{
+									"id":"192",
+									"type":"concert..."
+								},
+								"geometry":{
+									"type":"Point",
+									"coordinates":
+									[
+									2.371909700000060,
+									48.872065999999990
+									]
+								}
+								}, 	{
+								"type":"Feature",
+								"properties":{
+									"id":"193",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -85,7 +141,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6549",
+									"id":"194",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -99,7 +155,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6550",
+									"id":"195",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -113,7 +169,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6551",
+									"id":"196",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -127,7 +183,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6552",
+									"id":"197",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -141,7 +197,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6553",
+									"id":"198",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -155,7 +211,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6554",
+									"id":"199",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -169,7 +225,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6555",
+									"id":"200",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -183,7 +239,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6556",
+									"id":"201",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -197,7 +253,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6557",
+									"id":"202",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -211,7 +267,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6558",
+									"id":"203",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -225,7 +281,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6559",
+									"id":"204",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -239,7 +295,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6560",
+									"id":"205",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -253,7 +309,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6561",
+									"id":"206",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -267,7 +323,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6562",
+									"id":"207",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -281,7 +337,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6563",
+									"id":"208",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -295,7 +351,7 @@
 								}, 	{
 								"type":"Feature",
 								"properties":{
-									"id":"6564",
+									"id":"209",
 									"type":"concert..."
 								},
 								"geometry":{
@@ -304,6 +360,20 @@
 									[
 									8.833499699999948,
 									45.821247400000000
+									]
+								}
+								}, 	{
+								"type":"Feature",
+								"properties":{
+									"id":"210",
+									"type":"concert..."
+								},
+								"geometry":{
+									"type":"Point",
+									"coordinates":
+									[
+									2.086457600000017,
+									41.554939999999990
 									]
 								}
 								}]}
