@@ -25,7 +25,7 @@ class EventbriteCommand extends ContainerAwareCommand
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        for($jour = 0; $jour <= 7; $jour++) { // pour chaque jours a partir d'aujourd'hui
+        for ($jour = 0; $jour <= 7; $jour++) { // pour chaque jours a partir d'aujourd'hui
 			$time_start = microtime(true);
 
             $date_auj = date('Y-m-d', strtotime('+'.$jour.' day'));

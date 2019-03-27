@@ -5,7 +5,8 @@
     <title>Evenup</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet'>
     <link href='style.css' rel='stylesheet'>
 </head>
@@ -21,10 +22,8 @@
 </div>
 <div id="hum" style="padding:10px;color:#fff;background:#000;font-family:open sans,sans-serif;font-size:18pt;position:fixed;right:15px;top:100px">
 </div>
-
-<div class="fas fa-times" id="close_button"></div>
-<div id="card_container"></div>
-
+<div id="card_container">
+</div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2xlbXotc3BhZ2hldHRpIiwiYSI6ImNqcGpobjQ2ZDA1dHMza2xucDhudGZhNWsifQ.PobnKYF8IBNfZLH2a120Jg';
 var map = new mapboxgl.Map({
@@ -36,8 +35,8 @@ var map = new mapboxgl.Map({
 
 document.getElementById('date_event').addEventListener('mouseup', function(e) {
     let offset = e.target.value;
-    let jour = parseInt((new Date()).getDate()) + parseInt(offset);
-    let MaDate = (new Date()).getFullYear() + '-' + ("0" + ((new Date()).getMonth() + 1)).slice(-2) + '-' + jour;
+    let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
+
     document.getElementById('date_label').innerHTML = MaDate;
 
     map.addSource('earthquakes', {
@@ -81,6 +80,7 @@ document.getElementById('date_event').addEventListener('mouseup', function(e) {
 		if(clicked === false) {
 			clicked = true; // evite le spam pendant qu'on fait des requetes
 			document.getElementById('card_container').innerHTML = '';
+			Buttons();
 			
 			let offset = document.getElementById('date_event').value;
 			let jour = (parseInt((new Date()).getDate()) + parseInt(offset)).toString();
@@ -118,8 +118,6 @@ document.getElementById('date_event').addEventListener('mouseup', function(e) {
 						document.getElementById('card_container').insertAdjacentHTML('beforeend', '<div class="card"><div class="fas fa-heart" id="like_button"></div><div class="fas fa-paper-plane" id="share_button"></i></div><h1>'+data.title+'</h1>'+data.date+''+data.formatted_address+'</div>');
 					});
 			});
-			
-			
 		}
 	});
 	
