@@ -80,8 +80,7 @@ document.getElementById('date_event').addEventListener('mouseup', function(e) {
 		if(clicked === false) {
 			clicked = true; // evite le spam pendant qu'on fait des requetes
 			document.getElementById('card_container').innerHTML = '';
-			Buttons();
-			
+
 			let offset = document.getElementById('date_event').value;
 			let jour = (parseInt((new Date()).getDate()) + parseInt(offset)).toString();
 			
@@ -125,11 +124,7 @@ document.getElementById('date_event').addEventListener('mouseup', function(e) {
 		clicked = false;
 	});
 });
-function Buttons(){
-	document.getElementById('close_button').addEventListener('click', function(e) {
-		document.getElementById('card_container').innerHTML = '';
-	});
-}
+
 document.getElementById('date_event').addEventListener('mousedown', function() {
     map.removeLayer('earthquakes-heat');
     map.removeLayer('earthquakes-point');
