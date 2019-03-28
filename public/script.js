@@ -16,7 +16,7 @@ document.getElementById('date_event').addEventListener('mouseup', function(e) {
 	.then((res) => {
 		return res.json();
 	})
-	.then((data) => {		
+	.then((data) => {
 		map.addSource('earthquakes', {
 			"type": "geojson",
 			"data": data
@@ -91,14 +91,34 @@ document.getElementById('date_event').addEventListener('mouseup', function(e) {
 							return res.json();
 						})
 						.then((data) => {
-							document.getElementById('card_container').insertAdjacentHTML('beforeend','<div class="card"><div class="fas fa-heart" id="like_button"></div><a class="fas fa-paper-plane" id="share_button" href="https://www.google.fr/maps/dir//'+data.latitude+','+data.longitude+'"></a><h1>'+data.title+'</h1><details><p>'+data.description+'</p></details>'+data.formattedAddress+'<hr>'+data.date+'</div>');
+							document.getElementById('card_container').insertAdjacentHTML('beforeend','<div class="card" latitude="'+data.latitude+'" longitude="'+data.longitude+'"><div class="fas fa-heart" id="like_button"></div><a class="fas fa-paper-plane" target="_blank" id="share_button" href="https://www.google.fr/maps/dir//'+data.latitude+','+data.longitude+'"></a><h1>'+data.title+'</h1><details><p>'+data.description+'</p></details>'+data.formattedAddress+'<hr>'+data.date+'</div>');
+							
+							// zoom sur un point au survol de sa carte
+							cards = document.getElementsByClassName("card");
+							for(var i = 0; i < cards.length; i++){
+								cards[i].addEventListener('mouseenter', function(e){
+									map.flyTo({
+										center: [
+											e.target.attributes.longitude.value,
+											e.target.attributes.latitude.value
+										],
+										zoom: 15
+									});
+								});
+							}
+							// si on sors le curseur, dezoomer la carte
+							document.getElementById('card_container').addEventListener('mouseleave', function(e){
+								map.flyTo({
+									zoom: 5
+								});
+							});
 						});
 				});
+				
 				Buttons();
-
 			}
 		});
-
+		
 		map.on('mouseup', 'earthquakes-point', function () {
 			clicked = false;
 		});
@@ -109,6 +129,7 @@ function Buttons(){
     document.getElementById('close_button').addEventListener('click', function(e) {
         document.getElementById('card_container').innerHTML = '';
     });
+
 }
 document.getElementById('date_event').addEventListener('mousedown', function() {
     map.removeLayer('earthquakes-heat');
