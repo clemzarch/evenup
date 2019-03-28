@@ -39,29 +39,31 @@ class ExportCommand extends ContainerAwareCommand
             $c = count($events);
 
             foreach ($events as $i => $event) {
-                $response .= '{
-								"type":"Feature",
-								"properties":{
-									"id":"'.$event->getId().'",
-									"type":"concert..."
-								},
-								"geometry":{
-									"type":"Point",
-									"coordinates":
-									[
-                                        '.$event->getLongitude().',
-                                        '.$event->getLatitude().'
-									]
-								}
-							}';
+				if($event->getLongitude() != null) {
+					$response .= '{
+									"type":"Feature",
+									"properties":{
+										"id":"'.$event->getId().'",
+										"type":"concert..."
+									},
+									"geometry":{
+										"type":"Point",
+										"coordinates":
+										[
+											'.$event->getLongitude().',
+											'.$event->getLatitude().'
+										]
+									}
+								}';
 
-                if ($i + 1 != $c){ // si c'est pas le dernier event, on ecrit avec une virgule
-                    $response = $response.', ';
-                }
+					if ($i + 1 != $c){ // si c'est pas le dernier event, on ecrit avec une virgule
+						$response = $response.', ';
+					}
+				}
             }
 
             $out = fopen(__DIR__.'/../../public/output/'.$futureDay.'.json', 'w');
-            fwrite($out,'{"type": "FeatureCollection","crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },"features": ['.$response.']}');// ecriture du resultat
+            fwrite($out,'{"type": "FeatureCollection","crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },"features": ['.$response.']}'); // ecriture du resultat
             fclose($out);
         }
     }
