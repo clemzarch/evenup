@@ -60,8 +60,9 @@ body > div:nth-child(2) {
 #date_event {
     width: 95%;
     height: 2px;
-    background: #bbb;
-	box-shadow: 0 0 4pt #000;
+	background: #bcbcbc;
+    box-shadow: 0 1px 3px #0004;
+    outline: none;
 }
 
 input[type=range]::-moz-range-thumb {
@@ -78,11 +79,11 @@ input[type=range] {
 }
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    box-shadow: 0 5px 15px #0009;
+    box-shadow: 0 4px 15px #0005;
     border:none;
     height: 50px;
     width: 50px;
-    background: linear-gradient(80deg, #8E00BF,#d846ca);
+    background: linear-gradient(-30deg, #8E00BF,#d846ca);
     border-radius: 360px;
     cursor: pointer;
 }
@@ -115,10 +116,11 @@ details{
 	margin-bottom:13pt;
 }
 details summary {
+	outline:none;
 	text-align: center;
 	background: #fff;
 	font-family: Avenir-Medium;
-	cursor:
+	cursor:pointer;
 }
 details p{
 	max-height: 200pt;
@@ -191,6 +193,73 @@ details p{
 #like_button:hover {
 	background:#e71a52;
 	color:#fff;
+}
+
+
+/* Menu des filtres */
+#filter_button {
+	position:fixed;
+	bottom:0;
+	right:0;
+	background:#fff;
+	border-radius:360px;
+	margin:50pt;
+	padding: 19px;
+    font-size: 19px;
+	box-shadow: 0 4px 10px #0005;
+	cursor: pointer;
+}
+
+#filter_confirm_button {
+	position:fixed;
+	bottom:0;
+	right:0;
+	background:#fff;
+	color: #000;
+	border-radius:360px;
+	margin:50pt;
+	padding: 19px;
+    font-size: 19px;
+    width: 19px;
+    height: 19px;
+	box-shadow: 0 4px 10px #0005;
+	cursor: pointer;
+}
+
+#filter_container {
+	display:none;
+	position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000c;
+    color: #fff;
+	text-align: center;
+}
+#filter_container h1 {
+	margin: 50px 0;
+	font-weight: 100;
+}
+#filter_container form {
+	border-top: 1px solid #bbb;
+	padding-top: 50px;
+	text-align: left;
+	margin:auto;
+	max-width:300pt;
+    font-size: 13pt;
+	line-height: 2px;
+}
+#filter_container form label {
+	display: block;
+	padding: 30px;
+	transition-duration: 0.2s;
+}
+#filter_container form label:hover {
+	background:#fff1;
+}
+#filter_container form label input[type="checkbox"] {
+	float:right;
 }
 
 @media only screen and (max-width:900px) {

@@ -43,8 +43,7 @@ class ExportCommand extends ContainerAwareCommand
 					$response .= '{
 									"type":"Feature",
 									"properties":{
-										"id":"'.$event->getId().'",
-										"type":"concert..."
+										"id":"'.$event->getId().'"
 									},
 									"geometry":{
 										"type":"Point",

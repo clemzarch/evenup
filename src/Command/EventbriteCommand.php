@@ -46,12 +46,15 @@ class EventbriteCommand extends ContainerAwareCommand
                     $EventbriteIDs->setVenueId($venue_id);
                     $this->em->persist($EventbriteIDs);
 
-
                     $t = json_decode(file_get_contents('https://www.eventbriteapi.com/v3/venues/' . $venue_id . '/?token=XOUBJU4Z7YTN5F4TMTGE'));
                     $event = new Event();
                     $event->setLongitude($t->longitude);
                     $event->setLatitude($t->latitude);
+                    $event->setFormattedAddress($t->address->localized_address_display);
+                    $event->setCity($t->address->city);
+                    $event->setLocale($t->address->country);
                     $event->setTitle($d->events[$i]->name->text);
+                    $event->setDescription(trim($d->events[$i]->description->text));
                     $event->setDate($date_auj);
                     $this->em->persist($event);
                 }

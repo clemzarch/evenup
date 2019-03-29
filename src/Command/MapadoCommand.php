@@ -34,7 +34,7 @@ class MapadoCommand extends ContainerAwareCommand
 			$curl = curl_init();
 
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => "https://api.mapado.net/v2/activities?fields=@id,title,shortDate,nextDate,activityType,locale,description,address&itemsPerPage=400&when=".$futureDay."&periodOfDay=evening",
+				CURLOPT_URL => "https://api.mapado.net/v2/activities?fields=@id,title,shortDate,nextDate,activityType,locale,description,address&itemsPerPage=250&when=".$futureDay."&periodOfDay=evening",
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => "",
 				CURLOPT_MAXREDIRS => 10,
@@ -68,7 +68,6 @@ class MapadoCommand extends ContainerAwareCommand
 						->findOneBy(['mapado_id' => $mapado_id]);
 
 					if ($result == null) {
-						echo 'event existe pas, ajout en bdd'.PHP_EOL;
 						$MapadoIDs = new MapadoIDs();
 						$MapadoIDs->setMapadoId($mapado_id);
 						$this->em->persist($MapadoIDs);
@@ -99,8 +98,6 @@ class MapadoCommand extends ContainerAwareCommand
 
 		if ($err) {
 			echo "cURL Error #: " . $err;
-		} else {
-			echo $response;
 		}
 	}
 }

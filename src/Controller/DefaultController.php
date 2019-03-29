@@ -30,16 +30,20 @@ class DefaultController extends AbstractController
     }
 	
 	/**
-     * @Route("/geo/{year}-{month}-{day}", name="geo_json", methods={"GET"})
+* @Route("/geo/{year}-{month}-{day}/{bar}-{disco}-{fest}-{concert}-{repas}-{spectacle}", name="geo_json", methods={"GET"})
      */
-    public function geo($year, $month, $day)
+    public function geo($year, $month, $day,$bar,$disco,$fest,$concert,$repas,$spectacle)
     {
 		$futureDay = $year.'-'.$month.'-'.$day;
 
 		$repository = $this->em->getRepository(Event::class);
 
 		$events = $repository->findBy(
-			['date' => $futureDay]
+			[
+				'date' => $futureDay,
+				'activityType' => ($bar == 'on') ? null : null, 
+				'activityType' => ($disco == 'on') ? null : null, 
+			]
 		);
 		
 		$response = '';
@@ -51,8 +55,7 @@ class DefaultController extends AbstractController
 				$response .= '{
 								"type":"Feature",
 								"properties":{
-									"id":"'.$event->getId().'",
-									"type":"concert..."
+									"id":"'.$event->getId().'"
 								},
 								"geometry":{
 									"type":"Point",
@@ -69,8 +72,6 @@ class DefaultController extends AbstractController
 				}
 			}
 		}
-
-	//	$out = fopen(__DIR__.'/../../public/output/'.$futureDay.'.json', 'w');
 		
 		$response = '{
 			"type": "FeatureCollection",

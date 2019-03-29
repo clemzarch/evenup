@@ -16,8 +16,10 @@ function LoadGeoJson() {
     let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
 
     document.getElementById('date_label').innerHTML = MaDate;
-
-	fetch('/geo/'+MaDate)
+	
+	let filt_1 = document.getElementById('filt_1').value;
+	
+	fetch('/geo/'+MaDate+'/'+filt_1+'-null-null-null-null-null')
 	.then((res) => {
 		return res.json();
 	})
@@ -148,4 +150,12 @@ document.getElementById('date_event').addEventListener('mousemove', function(e){
     let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
     document.getElementById('date_label').innerHTML = MaDate;
 	document.getElementById('date_label').style.left = e.pageX-150 +'px';
+});
+
+// affiche le menu des filtres
+document.getElementById('filter_button').addEventListener('click', function(e){
+	document.getElementById('filter_container').style.display = "block";
+});
+document.getElementById('filter_confirm_button').addEventListener('click', function(e){
+	document.getElementById('filter_container').style.display = "none";
 });
