@@ -1,0 +1,58 @@
+body {
+	background-color: #2D2D2D;
+}
+
+input, textarea {
+	background-color: #2D2D2D !important;
+	border: 1px solid #8E00BF !important;
+}
+
+li {
+	color: #FFF;
+}
+
+::placeholder, #event1_date {
+	color: #777 !important;
+}
+
+
+.form-control:focus {
+	outline: 0;
+	box-shadow: 0 0 0 0.1rem rgba(142, 0, 191, 1);
+}
+
+.bg-evenup {
+	background-color: #8E00BF;
+}
+
+.text-evenup {
+	color: #8E00BF;
+	font-weight: bold;
+}
+
+.btn-white {
+	background-color: #FFF;
+	border-radius: 20px;
+}
+
+/* Change the checkbox color and background */
+
+.custom-control-label:before {
+	background-color: transparent;
+	border-color: #8E00BF;
+	width: 25px;
+	height: 25px;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+	background-color: #FFF;
+	border-color: #8E00BF;
+	width: 25px;
+	height: 25px;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::after {
+	background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='purple' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+	width: 25px;
+	height: 25px;
+}
