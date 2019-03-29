@@ -114,6 +114,12 @@ details{
     font-size: 13pt;
 	margin-bottom:13pt;
 }
+details summary {
+	text-align: center;
+	background: #fff;
+	font-family: Avenir-Medium;
+	cursor:
+}
 details p{
 	max-height: 200pt;
     overflow: auto;
@@ -193,9 +199,10 @@ details p{
 		white-space: normal;
         width: 50vw;
         max-width:300pt;
-        margin: 26px 8px 12px 8px;
+		margin: 26px 8px 20px 8px;
         padding:15px;
         word-break: break-word;
+		background:#f0f0f0;
 	}
 	
 	#card_container{
@@ -206,8 +213,11 @@ details p{
 		top: initial;
         overflow-y: visible;
 	}
-	#close-button{
-		left: 205px;
-		top: 45px;
+	#close_button{
+		position:fixed;
+		box-shadow: 0 -3px 20pt #0006;
+		left: 45%;
+		bottom: 17px;
+		top:unset;
 	}
 }

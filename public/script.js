@@ -81,9 +81,9 @@ function LoadGeoJson() {
 					.then((data) => {
 						data.list.forEach(function(list_item) {
 							if(list_item.dt_txt === MaDate+' 18:00:00') {
-								document.getElementById('meteo_value').innerHTML = list_item.weather[0].main;
-								document.getElementById('temp_value').innerHTML = list_item.main.temp+'';
-								document.getElementById('hum_value').innerHTML = list_item.main.humidity+'%';
+								document.getElementById('meteo').innerHTML = list_item.weather[0].main;
+								document.getElementById('temp').innerHTML = list_item.main.temp+'';
+								document.getElementById('hum').innerHTML = list_item.main.humidity+'%';
 							}
 						});
 					});
