@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource()
@@ -34,8 +35,12 @@ class Event
     private $title;
 	
 	/**
-	* @ORM\Column(type="string", nullable=false)
-	*/
+     * @ORM\Column(type="string", nullable=false)
+     * @Assert\Regex(
+     *     pattern="/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",
+     *     message="Format de date invalide"
+     * )
+     */
 	private $date;
 
     /**
@@ -50,6 +55,12 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 2,
+     *      minMessage = "Nombre de caractères minimum autorisés: {{ limit }}",
+     *      maxMessage = "Nombre de caractères maximum autorisés: {{ limit }}"
+     * )
      */
     private $locale;
 
