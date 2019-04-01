@@ -30,44 +30,45 @@ class DefaultController extends AbstractController
     }
 	
 	/**
-* @Route("/geo/{year}-{month}-{day}/{bar}-{disco}-{fest}-{concert}-{repas}-{spectacle}", name="geo_json", methods={"GET"})
+* @Route("/geo/{date}/{filters}", name="geo_json", methods={"GET"})
      */
-    public function geo($year, $month, $day,$bar,$disco,$fest,$concert,$repas,$spectacle)
+    public function geo($date, $filters)
     {
-		$futureDay = $year.'-'.$month.'-'.$day;
-
 		$repository = $this->em->getRepository(Event::class);
 
-		$events = $repository->findBy(
-			[
-				'date' => $futureDay,
-				'activityType' => ($bar == 'on') ? null : null, 
-				'activityType' => ($disco == 'on') ? null : null, 
-			]
-		);
+		$date = (string)$date;
 		
+		$events = $this->em->createQueryBuilder()
+			->select('event.id', 'event.longitude', 'event.latitude')
+			->from(Event::class, 'event')
+			->where('event.date LIKE :date')
+			->groupBy('event.title')
+			->setParameter('date', '%'.$date.'%')
+			->getQuery()
+			->getArrayResult();
+
 		$response = '';
 
 		$c = count($events);
 
 		foreach ($events as $i => $event) {
-			if($event->getLongitude() != null) {
+			if($event['longitude'] != null) {
 				$response .= '{
 								"type":"Feature",
 								"properties":{
-									"id":"'.$event->getId().'"
+									"id":"'.$event['id'].'"
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-										'.$event->getLongitude().',
-										'.$event->getLatitude().'
+										'.$event['longitude'].',
+										'.$event['latitude'].'
 									]
 								}
 							}';
 
-				if ($i + 1 != $c){ // si c'est pas le dernier event, on ecrit avec une virgule
+				if ($i + 1 != $c){ // si c'est pas le dernier event, on une virgule
 					$response = $response.', ';
 				}
 			}

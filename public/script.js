@@ -16,10 +16,19 @@ function LoadGeoJson() {
     let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
 
     document.getElementById('date_label').innerHTML = MaDate;
+
+	// recupere les checkboxes pour faire une liste des filtres actifs
+	checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+	let active_filters = [];
+	checkboxes.forEach(function(checkbox){
+		if (checkbox.checked == true) {
+			active_filters.push(checkbox.id);
+		}
+	});
+	console.log(active_filters);
 	
-	let filt_1 = document.getElementById('filt_1').value;
-	
-	fetch('/geo/'+MaDate+'/'+filt_1+'-null-null-null-null-null')
+	// recupere le geo-json d'apres la date et la liste de filtres actifs
+	fetch('/geo/'+MaDate+'/'+active_filters)
 	.then((res) => {
 		return res.json();
 	})
@@ -84,15 +93,18 @@ function LoadGeoJson() {
 						data.list.forEach(function(list_item) {
 							if(list_item.dt_txt === MaDate+' 18:00:00') {
 								document.getElementById('meteo').innerHTML = list_item.weather[0].main;
-								document.getElementById('temp').innerHTML = list_item.main.temp+'';
-								document.getElementById('hum').innerHTML = list_item.main.humidity+'%';
+								document.getElementById('temp').innerHTML = list_item.main.temp+' °C';
+								document.getElementById('hum').innerHTML = list_item.main.humidity+' %';
 							}
 						});
 					});
 
 				// recup les infos de l'event sur notre BDD, affiche les cards
-				e.features.forEach(function(event_item) {
-					fetch('api/events/'+event_item.properties.id)
+				events_clicked = e.features;
+				for(var i = 0; i < events_clicked.length; i++) {
+					if(i > 10) {break}; // limite le nombre d'events à fetch
+					
+					fetch('api/events/'+events_clicked[i].properties.id)
 						.then((res) => {
 							return res.json();
 						})
@@ -108,7 +120,8 @@ function LoadGeoJson() {
 											e.target.attributes.longitude.value,
 											e.target.attributes.latitude.value
 										],
-										zoom: 15
+										zoom: 15,
+										curve: 1
 									});
 								});
 							}
@@ -119,7 +132,7 @@ function LoadGeoJson() {
 								});
 							});
 						});
-				});
+				}
 				Buttons();
 			}
 		});

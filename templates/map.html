@@ -4,10 +4,8 @@
     <meta charset='utf-8'>
     <title>Evenup</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet'>
+	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet'>
     <link href='style.css' rel='stylesheet'>
 </head>
 <body>
@@ -16,27 +14,26 @@
     <label id="date_label"></label>
     <input type="range" id="date_event" min="0" max="7">
 </div>
-<div id="meteo" style="padding:10px;color:#fff;background:#000;font-family:open sans,sans-serif;position:fixed;right:15px;top:15px">
-</div>
-<div id="temp" style="padding:10px;color:#fff;background:#000;font-family:open sans,sans-serif;font-size:20pt;position:fixed;right:15px;top:50px">
-</div>
-<div id="hum" style="padding:10px;color:#fff;background:#000;font-family:open sans,sans-serif;font-size:18pt;position:fixed;right:15px;top:100px">
-</div>
+<div class="weather" id="meteo"></div>
+<div class="weather" id="temp"></div>
+<div class="weather" id="hum"></div>
 <div id="card_container"></div>
 
 <div id="filter_button" class="fas fa-sliders-h"></div>
 <div id="filter_container">
-<div id="filter_confirm_button" class="fas fa-chevron-right"></div>
+	<div id="filter_confirm_button" class="fas fa-chevron-right"></div>
 	<h1>Filtres</h1>
 	<form>
-	<label>Bar<input id="filt_1" type="checkbox"></input></label><br>
-	<label>Discothèques<input id="filt_2" type="checkbox"></input></label><br>
-	<label>Festival<input id="filt_3" type="checkbox"></input></label><br>
-	<label>Concert<input id="filt_4" type="checkbox"></input></label><br>
-	<label>Repas<input id="filt_5" type="checkbox"></input></label><br>
-	<label>Spectacles<input id="filt_6" type="checkbox"></input></label><br>
+		<label>Bar<input checked id="activity" type="checkbox"></input><span class="checkmark"></span></label>
+		<label>Discotèques<input checked id="filt_2" type="checkbox"><span class="checkmark"></span></input></label>
+		<label>Festival<input checked id="filt_3" type="checkbox"></input><span class="checkmark"></span></label>
+		<label>Concert<input checked id="filt_4" type="checkbox"></input><span class="checkmark"></span></label>
+		<label>Repas<input checked id="filt_5" type="checkbox"></input><span class="checkmark"></span></label>
+		<label>Spectacles<input checked id="filt_6" type="checkbox"></input><span class="checkmark"></span></label>
 	</form>
 </div>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
