@@ -90,7 +90,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 #card_container{
     position:fixed;
-    top:0;
+    top:70px;
     right:0;
 	max-height:100%;
     overflow:auto;
@@ -352,6 +352,38 @@ details p{
 }
 #hum:before {
 	content: "Humidité";
+}
+
+.evenup-nav img {
+	height: 60px;
+	margin: 0;
+	padding: 8px 16px;
+}
+
+.evenup-nav ul {
+	font-family: Avenir-medium, sans-serif;
+	font-size: 16px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	border-bottom: 2px solid #FFF;
+	background-color: #8E00BF;
+}
+
+.evenup-nav li {
+	display:  inline-block;
+	color: #cdc9c4;
+	padding: 8px 16px;
+	margin-top: 25px;
+	box-sizing: border-box;
+	float: right;
+	text-decoration: none;
+}
+
+.evenup-nav li:hover {
+	background-color: #d846ca;
+	color: #cdc9c4;
+	cursor: pointer;
 }
 
 @media only screen and (max-width:900px) {
