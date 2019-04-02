@@ -76,6 +76,8 @@ function LoadGeoJson() {
 		map.on('click', 'events-hitbox', function (e) {
 			if(clicked === false) {
 				clicked = true; // evite le spam pendant qu'on fait des requetes
+				document.getElementById('date_event').style.display = "none";
+				document.getElementById('weather_container').style.display = "block";
 				document.getElementById('card_container').innerHTML = '<div class="fas fa-times" id="close_button"></div>';
 
 				let offset = document.getElementById('date_event').value;
@@ -147,6 +149,8 @@ function Buttons(){
 			zoom: 5
 		});
         document.getElementById('card_container').innerHTML = '';
+		document.getElementById('date_event').style.display = "block";
+		document.getElementById('weather_container').style.display = "none";
     });
 }
 
@@ -160,15 +164,24 @@ document.getElementById('date_event').addEventListener('mousedown', function() {
 // deplace le date_label et affiche la date au dessus du range
 document.getElementById('date_event').addEventListener('mousemove', function(e){
 	let offset = e.target.value;
-    let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
-    document.getElementById('date_label').innerHTML = MaDate;
+    let MaDate = moment().add(parseInt(offset), 'days').format('D');
+    document.getElementById('date_label').innerHTML = MaDate+' Avril'; //TODO : ENLEVER TRICHE
 	document.getElementById('date_label').style.left = e.pageX-150 +'px';
 });
 
 // affiche le menu des filtres
 document.getElementById('filter_button').addEventListener('click', function(e){
 	document.getElementById('filter_container').style.display = "block";
+	document.getElementById('map').style.filter = "blur(20px)";
+	document.getElementById('card_container').style.filter = "blur(10px)";
+	document.getElementById('weather_container').style.filter = "blur(10px)";
+	document.getElementById('date_event').style.display = "none";
 });
+// cache le menu des filtres
 document.getElementById('filter_confirm_button').addEventListener('click', function(e){
 	document.getElementById('filter_container').style.display = "none";
+	document.getElementById('map').style.filter = "none";
+	document.getElementById('card_container').style.filter = "none";
+	document.getElementById('date_event').style.display = "block";
+	document.getElementById('weather_container').style.filter = "none";
 });

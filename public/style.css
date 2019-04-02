@@ -35,6 +35,7 @@ a {
     top:0;
     bottom:0;
     width:100%;
+	transition-duration: 0.5s;
 }
 #date_label{
 	color: #fff;
@@ -94,6 +95,7 @@ input[type=range]::-webkit-slider-thumb {
     right:0;
 	max-height:100%;
     overflow:auto;
+	transition-duration: 0.5s;
 }
 
 nav {
@@ -115,6 +117,7 @@ nav {
 .card h1{
     font-family: Avenir-Medium,sans-serif;
     font-size: 20pt;
+	margin: 12px 0;
 }
 details{
 	font-family: Avenir-Light,sans-serif;
@@ -143,8 +146,8 @@ details p{
     box-shadow: 0 3px 14pt #0003;
     z-index: 1;
     cursor: pointer;
-    width: 23px;
-    height: 21px;
+    height: 45px;
+	width: 45px;
     text-align: center;
     transition-duration: 0.2s;
     display: block;
@@ -220,7 +223,6 @@ details p{
 	bottom:0;
 	right:0;
 	background:#fff;
-	color: #000;
 	border-radius:360px;
 	margin:50pt;
 	padding: 19px;
@@ -229,6 +231,8 @@ details p{
     height: 19px;
 	box-shadow: 0 4px 10px #0005;
 	cursor: pointer;
+	color: #333;
+	width: 57px;
 }
 #filter_container {
 	display:none;
@@ -237,7 +241,7 @@ details p{
     left: 0;
     right: 0;
     bottom: 0;
-    background: #000c;
+    background: #0004;
     color: #fff;
 	text-align: center;
 }
@@ -314,6 +318,10 @@ details p{
 }
 
 /* blocs meteo */
+#weather_container{
+	transition-duration: 0.5s;
+	display: none;
+}
 .weather {
 	font-family: Avenir-Medium,sans-serif;
 	letter-spacing:2px;
@@ -336,19 +344,19 @@ details p{
 	border-radius:10px;
 }
 #meteo {
-	top: 95px;
+	top: 175px;
 }
 #meteo:before {
 	content: "Temps";
 }
 #temp {
-	top: 155px;
+	top: 230px;
 }
 #temp:before {
 	content: "Température";
 }
 #hum {
-	top: 215px;
+	top: 285px;
 }
 #hum:before {
 	content: "Humidité";
