@@ -366,13 +366,23 @@ details p{
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	border-bottom: 2px solid #FFF;
-	background-color: #8E00BF;
+	border-bottom: 2px solid #f0f0f0;
+	background-color: #2d2d2d;
+}
+
+.evenup-nav .active, .btn:hover {
+	background-color: #d846ca;
+	color:#f0f0f0;
+	padding: 7px 30px;
+  }
+
+.evenup-nav a {
+	color: inherit;
 }
 
 .evenup-nav li {
 	display:  inline-block;
-	color: #cdc9c4;
+	color: #d846ca;
 	padding: 8px 16px;
 	margin-top: 25px;
 	box-sizing: border-box;
