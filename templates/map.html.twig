@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Evenup</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>
+	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet'>
+	<!-- Bootstrap v4.2.3 -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<!-- Fontawesome v5 -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+
+	<!-- Favicon Even'up -->
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/evenup_favicon.png') }}">
+
+	<!-- Custom styles for this template -->
+	<link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href='style.css' rel='stylesheet'>
+</head>
+<body>
+<div id='map'>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-evenup">
+		<img class="img-fluid" style="height: 60px"; src="{{ asset('img/evenup_logo.png') }}" alt="logo evenup"></img>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav float-right ml-auto font-weight-bold">
+				<li class="nav-item">
+					<a class="nav-link active" href="{{ path('map') }}"><i class="fas fa-eye"></i> Voir les événements</a>
+				</li>              
+				<li class="nav-item">
+					<a class="nav-link" href="/event/new" target="_blank"><i class="fas fa-plus"></i> Ajout d'événement</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+<div style="position:fixed">
+    <label id="date_label"></label>
+    <input type="range" id="date_event" min="0" max="7">
+</div>
+<div class="weather" id="meteo"></div>
+<div class="weather" id="temp"></div>
+<div class="weather" id="hum"></div>
+<div id="card_container"></div>
+
+<div id="filter_button" class="fas fa-sliders-h"></div>
+<div id="filter_container">
+	<div id="filter_confirm_button" class="fas fa-chevron-right"></div>
+	<h1>Filtres</h1>
+	<form>
+		<label>Bar<input checked id="activity" type="checkbox"></input><span class="checkmark"></span></label>
+		<label>Discotèques<input checked id="filt_2" type="checkbox"><span class="checkmark"></span></input></label>
+		<label>Festival<input checked id="filt_3" type="checkbox"></input><span class="checkmark"></span></label>
+		<label>Concert<input checked id="filt_4" type="checkbox"></input><span class="checkmark"></span></label>
+		<label>Repas<input checked id="filt_5" type="checkbox"></input><span class="checkmark"></span></label>
+		<label>Spectacles<input checked id="filt_6" type="checkbox"></input><span class="checkmark"></span></label>
+	</form>
+</div>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -26,7 +26,8 @@ body {
     padding:0;
     font-family: Avenir-Light, sans-serif;
 }
-a{
+
+a {
 	text-decoration:none;
 }
 #map {
@@ -94,6 +95,12 @@ input[type=range]::-webkit-slider-thumb {
 	max-height:100%;
     overflow:auto;
 }
+
+nav {
+	font-family: Avenir-Medium, sans-serif;
+	font-size: 15px;
+}
+
 .card{
 	font-family: Avenir-Medium,sans-serif;
     font-size: 13pt;
@@ -202,7 +209,7 @@ details p{
 	right:0;
 	background:#fff;
 	border-radius:360px;
-	margin:50pt;
+	margin:60pt;
 	padding: 19px;
     font-size: 19px;
 	box-shadow: 0 4px 10px #0005;
@@ -329,19 +336,19 @@ details p{
 	border-radius:10px;
 }
 #meteo {
-	top:15px;
+	top: 95px;
 }
 #meteo:before {
 	content: "Temps";
 }
 #temp {
-	top:75px;
+	top: 155px;
 }
 #temp:before {
 	content: "Température";
 }
 #hum {
-	top:135px;
+	top: 215px;
 }
 #hum:before {
 	content: "Humidité";
