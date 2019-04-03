@@ -100,9 +100,10 @@ input[type=range]::-webkit-slider-thumb {
 
 #card_container {
     position: fixed;
-    top: 70px;
+    top: 82px;
     bottom: 0;
     right: 0;
+	bottom: 0;
     max-height: 100%;
     overflow: auto;
     transition-duration: 0.5s;
@@ -115,7 +116,7 @@ nav {
 
 .card {
     font-family: Avenir-Medium, sans-serif;
-    font-size: 13pt;
+    font-size: 11pt;
     background: #f5f5f5;
     color: #2b2c2c;
     box-shadow: 0 5pt 10pt #0005;
@@ -127,7 +128,7 @@ nav {
 
 .card h1 {
     font-family: Avenir-Medium, sans-serif;
-    font-size: 20pt;
+    font-size: 17pt;
     margin: 12px 0;
 }
 
@@ -153,15 +154,16 @@ details p {
 
 #close_button {
     position: sticky;
-    font-size: 17pt;
+    font-size: 26px;
     color: #000;
     background: #fff;
-    padding: 11px 10px;
+    padding: 10px;
     border-radius: 360px;
     box-shadow: 0 3px 14pt #0003;
     z-index: 1;
     cursor: pointer;
     width: 26px;
+	height:26px;
     text-align: center;
     transition-duration: 0.2s;
     display: block;
@@ -267,24 +269,30 @@ details p {
 }
 
 #filter_container h1 {
-    margin: 50px 0;
+    margin: 40px 0;
     font-weight: 100;
 }
 
 #filter_container form {
     border-top: 1px solid #bbb;
-    padding: 50px 40pt 0 40pt;
+    padding: 40px 10pt 0 10pt;
     text-align: left;
     margin: auto;
     max-width: 300pt;
-    font-size: 13pt;
+    font-size: 15pt;
     line-height: 2px;
 }
 
 #filter_container form label {
     display: block;
-    padding: 30px 0;
-    transition-duration: 0.2s;
+    padding: 30px;
+	transition-duration:1s;
+	border-radius:10px;
+}
+
+#filter_container form label:active {
+    background:#fff2;
+	transition-duration:0s;
 }
 
 /* Hide the browser's default checkbox */
@@ -301,20 +309,10 @@ details p {
 .checkmark {
     height: 25px;
     width: 25px;
-    background-color: #111;
+    background:none;
     float: right;
     display: inline-block;
     margin: -13px 0;
-}
-
-/* On mouse-over, add a grey background color */
-#filter_container form label:hover input ~ .checkmark {
-    outline: 2px solid #8E00BF;
-}
-
-/* When the checkbox is checked, add a blue background */
-#filter_container form label input:checked ~ .checkmark {
-    background: none;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -335,7 +333,7 @@ details p {
     top: 1px;
     width: 8px;
     height: 15px;
-    border: solid #8E00BF;
+    border: solid #d846ca;
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -389,7 +387,7 @@ details p {
 }
 
 #meteo {
-    top: 175px;
+    top: 100px;
 }
 
 #meteo:before {
@@ -397,7 +395,7 @@ details p {
 }
 
 #temp {
-    top: 230px;
+    top: 155px;
 }
 
 #temp:before {
@@ -405,7 +403,7 @@ details p {
 }
 
 #hum {
-    top: 285px;
+    top: 210px;
 }
 
 #hum:before {
@@ -458,7 +456,7 @@ details p {
     .card {
         display: inline-block;
         white-space: normal;
-        width: 50vw;
+        width: 80vw;
         max-width: 300pt;
         margin: 26px 8px 20px 8px;
         padding: 15px;
@@ -470,7 +468,7 @@ details p {
         white-space: nowrap;
         left: 0;
         right: 0;
-        bottom: 0;
+        bottom: 20px;
         top: initial;
         overflow-y: visible;
     }
@@ -479,7 +477,11 @@ details p {
         position: fixed;
         box-shadow: 0 -3px 20pt #0006;
         left: 45%;
-        bottom: 17px;
+        bottom: 10px;
         top: unset;
     }
+	
+	.evenup-nav {
+		height:50px;
+	}
 }
