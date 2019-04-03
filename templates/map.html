@@ -11,17 +11,26 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/evenup_favicon.png') }}">
     <!-- Custom styles for this template -->
     <link href='css/map.css' rel='stylesheet'>
+
 </head>
 <body>
+
 <div id='map'>
-    <nav class="evenup-nav the-blur">
+    <nav class="evenup-nav">
         <ul>
+            
             <img src="img/evenup3_logo.svg" alt="logo evenup">
             <li><a href="/event/new">Ajouter un événement</a></li>
             <li><a class="active" href="/map.html">Voir les événements</a></li>
+            <button class="dropdown"><i class="fas fa-bars"></i></button>
 		</ul>	
-	</nav>
+    </nav>
+            <div class="submenu">
+                <li><a href="/event/new">Ajouter un événement</a></li>
+                <li><a class="active" href="/map.html">Voir les événements</a></li>
+            </div>        
 </div>
+
 <div id="date_controls" style="position:fixed">
     <label id="date_label"></label>
     <input value="0" type="range" id="date_range" min="0" max="7">
@@ -48,9 +57,20 @@
         <label>Spectacles<input checked id="filt_6" type="checkbox"><span class="checkmark"></span></label>
     </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="js/map.js"></script>
 
+<script>
+
+// Bouton Navbar
+$(document).ready(function() {
+	$(".dropdown").click(function() {
+		$(".submenu").stop().slideToggle();
+	});
+});
+</script>
 </body>
 </html>
