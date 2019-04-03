@@ -38,4 +38,16 @@ class EventController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+	
+	/**
+     * @Route("/add_like/{id}", name="add_like", methods={"GET","POST"})
+     */
+    public function addLike($id)
+    {
+		$repository = $this->getDoctrine()->getManager()->getRepository(Event::class);
+		
+		$repository->findOneBy(['id' => $id])->AddLike();
+		
+		return $repository->findOneBy(['id' => $id])->getLikes();
+    }
 }

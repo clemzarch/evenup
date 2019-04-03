@@ -73,6 +73,12 @@ class Event
      * @ORM\Column(type="text", length=1000, nullable=true)
      */
     private $description;
+	
+	/**
+	 * @ORM\Column(type="integer", length=20, nullable=true)
+	 */
+	private $likes;
+	
 
     public function getId(): ?int
     {
@@ -186,4 +192,16 @@ class Event
 
         return $this;
     }
+	
+	public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
+	public function AddLike()
+	{
+		$this->likes = $this->likes + 1;
+		
+		return $this;
+	}
 }

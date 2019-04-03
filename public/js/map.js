@@ -8,14 +8,13 @@ var map = new mapboxgl.Map({
 
 LoadGeoJson();
 document.getElementById('date_event').addEventListener('mouseup', function() {
+	UnloadGeoJson();
 	LoadGeoJson();
 });
 	
 function LoadGeoJson() {
     let offset = document.getElementById('date_event').value;
     let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
-
-    document.getElementById('date_label').innerHTML = MaDate;
 
 	// recupere les checkboxes pour faire une liste des filtres actifs
 	checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -77,30 +76,13 @@ function LoadGeoJson() {
 			if(clicked === false) {
 				clicked = true; // evite le spam pendant qu'on fait des requetes
 				document.getElementById('date_event').style.display = "none";
-				document.getElementById('weather_container').style.display = "block";
-				document.getElementById('card_container').innerHTML = '<div class="fas fa-times" id="close_button"></div>';
-
+				
 				let offset = document.getElementById('date_event').value;
 				let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
 
 				const longitude = e.features[0].geometry.coordinates[0];
 				const lattitude = e.features[0].geometry.coordinates[1];
 				
-				//	recup la meteo depuis openweather
-				fetch('http://api.openweathermap.org/data/2.5/forecast?lat='+lattitude+'&lon='+longitude+'&appid=7e39eceace89a2eabd5786d8248a25bd&units=metric')
-					.then((res) => {
-						return res.json();
-					})
-					.then((data) => {
-						data.list.forEach(function(list_item) {
-							if(list_item.dt_txt === MaDate+' 18:00:00') {
-								document.getElementById('meteo').innerHTML = list_item.weather[0].main;
-								document.getElementById('temp').innerHTML = list_item.main.temp+' °C';
-								document.getElementById('hum').innerHTML = list_item.main.humidity+' %';
-							}
-						});
-					});
-
 				// recup les infos de l'event sur notre BDD, affiche les cards
 				events_clicked = e.features;
 				for(var i = 0; i < events_clicked.length; i++) {
@@ -128,41 +110,65 @@ function LoadGeoJson() {
 								});
 							}
 							// si on sors le curseur des cards, dezoomer la carte
-							document.getElementById('card_container').addEventListener('mouseleave', function(e){
+							document.getElementById('card_container').addEventListener('mouseleave', function(){
 								map.flyTo({
 									zoom: 8
 								});
 							});
 						});
 				}
-				Buttons();
+				
+				Meteo(lattitude, longitude, MaDate);
+				
+				CloseButton();
 			}
 		});
 	});
 }
 
 // bouton de fermeture des cards
-function Buttons(){
+function CloseButton(){
+	document.getElementById('card_container').innerHTML = '<div class="fas fa-times" id="close_button"></div>';
+	
     document.getElementById('close_button').addEventListener('click', function(e) {
 		map.flyTo({
 			center: [1, 47],
 			zoom: 5
 		});
         document.getElementById('card_container').innerHTML = '';
-		document.getElementById('date_event').style.display = "block";
+		document.getElementById('date_event').style.display = "unset";
 		document.getElementById('weather_container').style.display = "none";
     });
 }
 
+//	recup la meteo depuis openweather
+function Meteo(lattitude, longitude, MaDate) {
+	document.getElementById('weather_container').style.display = "block";
+	
+	fetch('http://api.openweathermap.org/data/2.5/forecast?lat='+lattitude+'&lon='+longitude+'&appid=7e39eceace89a2eabd5786d8248a25bd&units=metric')
+		.then((res) => {
+			return res.json();
+		})
+		.then((data) => {
+			data.list.forEach(function(list_item) {
+				if(list_item.dt_txt === MaDate+' 18:00:00') {
+					document.getElementById('meteo').innerHTML = list_item.weather[0].main;
+					document.getElementById('temp').innerHTML = list_item.main.temp+' °C';
+					document.getElementById('hum').innerHTML = list_item.main.humidity+' %';
+				}
+			});
+		});
+}
+
 // efface les layers avant d'en ajouter un nouveau
-document.getElementById('date_event').addEventListener('mousedown', function() {
+function UnloadGeoJson() {
 	map.removeLayer('events-heat');
 	map.removeLayer('events-hitbox');
 	map.removeSource('events');
-});
+}
 
 // deplace le date_label et affiche la date au dessus du range
-document.getElementById('date_event').addEventListener('mousemove', function(e){
+document.getElementById('date_event').addEventListener('mousemove', function(e) {
 	let offset = e.target.value;
     let MaDate = moment().add(parseInt(offset), 'days').format('D');
     document.getElementById('date_label').innerHTML = MaDate+' Avril'; //TODO : ENLEVER TRICHE
@@ -170,18 +176,20 @@ document.getElementById('date_event').addEventListener('mousemove', function(e){
 });
 
 // affiche le menu des filtres
-document.getElementById('filter_button').addEventListener('click', function(e){
+document.getElementById('filter_button').addEventListener('click', function(){
 	document.getElementById('filter_container').style.display = "block";
 	document.getElementById('map').style.filter = "blur(20px)";
 	document.getElementById('card_container').style.filter = "blur(10px)";
 	document.getElementById('weather_container').style.filter = "blur(10px)";
 	document.getElementById('date_event').style.display = "none";
+	UnloadGeoJson();
 });
 // cache le menu des filtres
-document.getElementById('filter_confirm_button').addEventListener('click', function(e){
+document.getElementById('filter_confirm_button').addEventListener('click', function() {
+	LoadGeoJson();
 	document.getElementById('filter_container').style.display = "none";
 	document.getElementById('map').style.filter = "none";
 	document.getElementById('card_container').style.filter = "none";
-	document.getElementById('date_event').style.display = "block";
+	document.getElementById('date_event').style.display = "unset";
 	document.getElementById('weather_container').style.filter = "none";
 });

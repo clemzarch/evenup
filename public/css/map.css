@@ -1,18 +1,18 @@
 @font-face {
 	font-family: Avenir-Light;
-	src: url(Avenir-Light-07.ttf);
+	src: url(../fonts/Avenir-Light-07.ttf);
 }
 @font-face {
     font-family: Avenir-Medium;
-    src: url(Avenir-Medium-09.ttf);
+    src: url(../fonts/Avenir-Medium-09.ttf);
 }
 @font-face {
 	font-family: Avenir-Heavy;
-	src: url(Avenir-Heavy-05.ttf);
+	src: url(../fonts/Avenir-Heavy-05.ttf);
 }
 @font-face {
     font-family: Avenir-Black;
-    src: url(Avenir-Black-03.ttf);
+    src: url(../fonts/Avenir-Black-03.ttf);
 }
 
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib,
@@ -131,7 +131,7 @@ details summary {
 	outline:none;
 	text-align: center;
 	background: #fff;
-	font-family: Avenir-Medium;
+	font-family: Avenir-Medium, sans-serif;
 	cursor:pointer;
 }
 details p{
@@ -241,9 +241,9 @@ details p{
     left: 0;
     right: 0;
     bottom: 0;
-    background: #0004;
-    color: #fff;
+	color: #fff;
 	text-align: center;
+	background: #0004 url(../img/texture.png);
 }
 #filter_container h1 {
 	margin: 50px 0;
