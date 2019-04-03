@@ -1,112 +1,120 @@
 @font-face {
-	font-family: Avenir-Light;
-	src: url(../fonts/Avenir-Light-07.ttf);
+    font-family: Avenir-Light;
+    src: url(../fonts/Avenir-Light-07.ttf);
 }
+
 @font-face {
     font-family: Avenir-Medium;
     src: url(../fonts/Avenir-Medium-09.ttf);
 }
+
 @font-face {
-	font-family: Avenir-Heavy;
-	src: url(../fonts/Avenir-Heavy-05.ttf);
+    font-family: Avenir-Heavy;
+    src: url(../fonts/Avenir-Heavy-05.ttf);
 }
+
 @font-face {
     font-family: Avenir-Black;
     src: url(../fonts/Avenir-Black-03.ttf);
 }
 
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib,
-a.mapboxgl-ctrl-logo
-{
-	display:none;
+a.mapboxgl-ctrl-logo {
+    display: none;
 }
 
 body {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     font-family: Avenir-Light, sans-serif;
-	background: #222;
+    background: #222;
 }
 
 a {
-	text-decoration:none;
-}
-#map {
-    position:absolute;
-    top:0;
-    bottom:0;
-    width:100%;
-	transition-duration: 0.5s;
-}
-#date_label{
-	color: #fff;
-	font-family: Avenir-Black, sans-serif;
-	text-shadow: 0 5px 7px #000;
-	font-size: 30pt;
-	position: fixed;
-	bottom: 84pt;
-	display:none;
-	width:300px;
+    text-decoration: none;
 }
 
-body > div:nth-child(2):active #date_label{
-	display:block;
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    transition-duration: 0.5s;
 }
-body > div:nth-child(2) {
+
+#date_label {
+    color: #fff;
+    font-family: Avenir-Black, sans-serif;
+    text-shadow: 0 5px 7px #000;
+    font-size: 30pt;
+    position: fixed;
+    bottom: 84pt;
+    display: none;
+    width: 300px;
+}
+
+#date_controls:active #date_label {
+    display: block;
+}
+
+#date_controls {
     width: 100%;
     bottom: 45pt;
     left: 0;
     right: 0;
-    text-align:center;
+    text-align: center;
 }
 
-#date_event {
+#date_range {
     width: 95%;
     height: 2px;
-	background: #bcbcbc;
+    background: #bcbcbc;
     box-shadow: 0 1px 3px #0004;
     outline: none;
 }
 
 input[type=range]::-moz-range-thumb {
     box-shadow: 0 5px 15px #0009;
-    border:none;
+    border: none;
     height: 50px;
     width: 50px;
-    background: linear-gradient(80deg, #8E00BF,#d846ca);
+    background: linear-gradient(80deg, #8E00BF, #d846ca);
     border-radius: 360px;
     cursor: pointer;
 }
+
 input[type=range] {
     -webkit-appearance: none;
 }
+
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     box-shadow: 0 4px 15px #0005;
-    border:none;
+    border: none;
     height: 50px;
     width: 50px;
-    background: linear-gradient(-30deg, #8E00BF,#d846ca);
+    background: linear-gradient(-30deg, #8E00BF, #d846ca);
     border-radius: 360px;
     cursor: pointer;
 }
-#card_container{
-    position:fixed;
-    top:70px;
-	bottom:0;
-    right:0;
-	max-height:100%;
-    overflow:auto;
-	transition-duration: 0.5s;
+
+#card_container {
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    right: 0;
+    max-height: 100%;
+    overflow: auto;
+    transition-duration: 0.5s;
 }
 
 nav {
-	font-family: Avenir-Medium, sans-serif;
-	font-size: 15px;
+    font-family: Avenir-Medium, sans-serif;
+    font-size: 15px;
 }
 
-.card{
-	font-family: Avenir-Medium,sans-serif;
+.card {
+    font-family: Avenir-Medium, sans-serif;
     font-size: 13pt;
     background: #f5f5f5;
     color: #2b2c2c;
@@ -116,28 +124,33 @@ nav {
     border-radius: 17pt;
     width: 300pt;
 }
-.card h1{
-    font-family: Avenir-Medium,sans-serif;
+
+.card h1 {
+    font-family: Avenir-Medium, sans-serif;
     font-size: 20pt;
-	margin: 12px 0;
+    margin: 12px 0;
 }
-details{
-	font-family: Avenir-Light,sans-serif;
-	color: #666;
+
+details {
+    font-family: Avenir-Light, sans-serif;
+    color: #666;
     font-size: 13pt;
-	margin-bottom:13pt;
+    margin-bottom: 13pt;
 }
+
 details summary {
-	outline:none;
-	text-align: center;
-	background: #fff;
-	font-family: Avenir-Medium, sans-serif;
-	cursor:pointer;
+    outline: none;
+    text-align: center;
+    background: #fff;
+    font-family: Avenir-Medium, sans-serif;
+    cursor: pointer;
 }
-details p{
-	max-height: 200pt;
+
+details p {
+    max-height: 200pt;
     overflow: auto;
 }
+
 #close_button {
     position: sticky;
     font-size: 17pt;
@@ -148,16 +161,17 @@ details p{
     box-shadow: 0 3px 14pt #0003;
     z-index: 1;
     cursor: pointer;
-	width: 26px;
+    width: 26px;
     text-align: center;
     transition-duration: 0.2s;
     display: block;
     left: 220px;
     top: 18px;
 }
+
 #close_button:hover {
-	color: #4b4b49;
-	background: #cdc9c4;
+    color: #4b4b49;
+    background: #cdc9c4;
 }
 
 #share_button {
@@ -178,9 +192,10 @@ details p{
     margin: -40px 0;
     transition-duration: 0.2s;
 }
+
 #share_button:hover {
-	color:#000;
-	background:#fff;
+    color: #000;
+    background: #fff;
 }
 
 #like_button {
@@ -201,234 +216,270 @@ details p{
     float: left;
     transition-duration: 0.2s;
 }
+
 #like_button:hover {
-	background:#e71a52;
-	color:#fff;
+    background: #e71a52;
+    color: #fff;
 }
 
 /* Menu des filtres */
 #filter_button {
-	position:fixed;
-	bottom:0;
-	right:0;
-	background:#fff;
-	border-radius:360px;
-	margin:60pt;
-	padding: 19px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 360px;
+    margin: 60pt;
+    padding: 19px;
     font-size: 19px;
-	box-shadow: 0 4px 10px #0005;
-	cursor: pointer;
+	width:19px;
+	height:19px;
+    box-shadow: 0 4px 10px #0005;
+    cursor: pointer;
 }
+
 #filter_confirm_button {
-	position:fixed;
-	bottom:0;
-	right:0;
-	background:#fff;
-	border-radius:360px;
-	margin:60pt;
-	padding: 19px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 360px;
+    margin: 60pt;
+    padding: 19px;
     font-size: 19px;
-    width: 19px;
-    height: 19px;
-	box-shadow: 0 4px 10px #0005;
-	cursor: pointer;
-	color: #333;
+    width:19px;
+	height:19px;
+    box-shadow: 0 4px 10px #0005;
+    cursor: pointer;
+    color: #333;
 }
+
 #filter_container {
-	display:none;
-	position: fixed;
+    display: none;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-	color: #fff;
-	text-align: center;
-	background: #0004 url(../img/texture.png);
+    color: #fff;
+    text-align: center;
+    background: #0004 url(../img/texture.png);
 }
+
 #filter_container h1 {
-	margin: 50px 0;
-	font-weight: 100;
+    margin: 50px 0;
+    font-weight: 100;
 }
+
 #filter_container form {
-	border-top: 1px solid #bbb;
-	padding-top: 50px;
-	text-align: left;
-	margin:auto;
-	max-width:300pt;
+    border-top: 1px solid #bbb;
+    padding: 50px 40pt 0 40pt;
+    text-align: left;
+    margin: auto;
+    max-width: 300pt;
     font-size: 13pt;
-	line-height: 2px;
+    line-height: 2px;
 }
+
 #filter_container form label {
-	display: block;
-	padding: 30px 0;
-	transition-duration: 0.2s;
-}
-#filter_container form label:hover {
-	/* outline:2px solid #8E00BF; */
+    display: block;
+    padding: 30px 0;
+    transition-duration: 0.2s;
 }
 
 /* Hide the browser's default checkbox */
 #filter_container form label input {
-	position: absolute;
-	opacity: 0;
-	cursor: pointer;
-	height: 0;
-	width: 0;
-	display: none;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    display: none;
 }
+
 /* Create a custom checkbox */
 .checkmark {
-	height: 25px;
-	width: 25px;
-	background-color: #111;
-	float:right;
-	display: inline-block;
-	margin: -13px 0;
+    height: 25px;
+    width: 25px;
+    background-color: #111;
+    float: right;
+    display: inline-block;
+    margin: -13px 0;
 }
+
 /* On mouse-over, add a grey background color */
 #filter_container form label:hover input ~ .checkmark {
-	outline:2px solid #8E00BF;
+    outline: 2px solid #8E00BF;
 }
+
 /* When the checkbox is checked, add a blue background */
 #filter_container form label input:checked ~ .checkmark {
-	background-color: #000;
+    background: none;
 }
+
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
+    content: "";
+    position: absolute;
+    display: none;
 }
+
 /* Show the checkmark when checked */
 #filter_container form label input:checked ~ .checkmark:after {
-  display: block;
+    display: block;
 }
+
 /* Style the checkmark/indicator */
 #filter_container form label .checkmark:after {
-	left: 7px;
-	top: 1px;
-	width: 8px;
-	height: 15px;
-	border: solid #8E00BF;
-	border-width: 0 3px 3px 0;
-	-webkit-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	transform: rotate(45deg);
-	position: relative;
+    left: 7px;
+    top: 1px;
+    width: 8px;
+    height: 15px;
+    border: solid #8E00BF;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: relative;
+}
+
+/* avancer dans la timeline */
+#play_button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    border-radius: 360px;
+    margin: 60pt;
+    padding: 19px;
+    font-size: 19px;
+	width:19px;
+	height:19px;
+    box-shadow: 0 4px 10px #0005;
+    cursor: pointer;
 }
 
 /* blocs meteo */
-#weather_container{
-	transition-duration: 0.5s;
-	display: none;
+#weather_container {
+    transition-duration: 0.5s;
+    display: none;
 }
+
 .weather {
-	font-family: Avenir-Medium,sans-serif;
-	letter-spacing:2px;
+    font-family: Avenir-Medium, sans-serif;
+    letter-spacing: 2px;
     font-size: 13pt;
-	position: fixed;
+    position: fixed;
     background: #f5f5f5;
     color: #2b2c2c;
-	padding:10px;
-	border-radius:10px;
-	left: 15px;
-	box-shadow: 0 0 10px #0003;
-	text-align:center;
+    padding: 10px;
+    border-radius: 10px;
+    left: 15px;
+    box-shadow: 0 0 10px #0003;
+    text-align: center;
 }
+
 .weather:before {
-	font-family: Avenir-Light,sans-serif;
-	letter-spacing:initial;
-	background:#fff;
-	padding:5px;
-	margin:0 10px 0 0;
-	border-radius:10px;
+    font-family: Avenir-Light, sans-serif;
+    letter-spacing: initial;
+    background: #fff;
+    padding: 5px;
+    margin: 0 10px 0 0;
+    border-radius: 10px;
 }
+
 #meteo {
-	top: 175px;
+    top: 175px;
 }
+
 #meteo:before {
-	content: "Temps";
+    content: "Temps";
 }
+
 #temp {
-	top: 230px;
+    top: 230px;
 }
+
 #temp:before {
-	content: "Température";
+    content: "Température";
 }
+
 #hum {
-	top: 285px;
+    top: 285px;
 }
+
 #hum:before {
-	content: "Humidité";
+    content: "Humidité";
 }
 
 .evenup-nav img {
-	height: 60px;
-	margin: 0;
-	padding: 8px 16px;
+    height: 60px;
+    margin: 0;
+    padding: 8px 16px;
 }
 
 .evenup-nav ul {
-	font-family: Avenir-medium, sans-serif;
-	font-size: 16px;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	border-bottom: 1px solid #bcbcbc;
-	background-color: #2d2d2d;
+    font-family: Avenir-medium, sans-serif;
+    font-size: 16px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #bcbcbc;
+    background-color: #2d2d2d;
 }
 
 .evenup-nav .active, .btn:hover {
-	background-color: #d846ca;
-	color:#f0f0f0;
-	padding: 7px 30px;
-  }
+    background-color: #d846ca;
+    color: #f0f0f0;
+    padding: 7px 30px;
+}
 
 .evenup-nav a {
-	color: inherit;
+    color: inherit;
 }
 
 .evenup-nav li {
-	display:  inline-block;
-	color: #d846ca;
-	padding: 8px 16px;
-	margin-top: 25px;
-	box-sizing: border-box;
-	float: right;
-	text-decoration: none;
+    display: inline-block;
+    color: #d846ca;
+    padding: 8px 16px;
+    margin-top: 25px;
+    box-sizing: border-box;
+    float: right;
+    text-decoration: none;
 }
 
 .evenup-nav li:hover {
-	background-color: #d846ca;
-	color: #cdc9c4;
-	cursor: pointer;
+    background-color: #d846ca;
+    color: #cdc9c4;
+    cursor: pointer;
 }
 
-@media only screen and (max-width:900px) {
-	.card {
-		display:inline-block;
-		white-space: normal;
+@media only screen and (max-width: 900px) {
+    .card {
+        display: inline-block;
+        white-space: normal;
         width: 50vw;
-        max-width:300pt;
-		margin: 26px 8px 20px 8px;
-        padding:15px;
+        max-width: 300pt;
+        margin: 26px 8px 20px 8px;
+        padding: 15px;
         word-break: break-word;
-		background:#f0f0f0;
-	}
-	
-	#card_container{
-		white-space: nowrap;
-		left: 0;
-		right: 0;
-		bottom:0;
-		top: initial;
+        background: #f0f0f0;
+    }
+
+    #card_container {
+        white-space: nowrap;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: initial;
         overflow-y: visible;
-	}
-	#close_button{
-		position:fixed;
-		box-shadow: 0 -3px 20pt #0006;
-		left: 45%;
-		bottom: 17px;
-		top:unset;
-	}
+    }
+
+    #close_button {
+        position: fixed;
+        box-shadow: 0 -3px 20pt #0006;
+        left: 45%;
+        bottom: 17px;
+        top: unset;
+    }
 }

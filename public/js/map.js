@@ -1,5 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2xlbXotc3BhZ2hldHRpIiwiYSI6ImNqcGpobjQ2ZDA1dHMza2xucDhudGZhNWsifQ.PobnKYF8IBNfZLH2a120Jg';
-var map = new mapboxgl.Map({
+let map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/clemz-spaghetti/cjqnuhhxz6b9h2smwrg0wmz1j',
     center: [1, 47],
@@ -7,13 +7,15 @@ var map = new mapboxgl.Map({
 });
 
 LoadGeoJson();
-document.getElementById('date_event').addEventListener('mouseup', function() {
-	UnloadGeoJson();
-	LoadGeoJson();
+
+document.getElementById('date_range').addEventListener('change', function () {
+	console.log('mouseup');
+    UnloadGeoJson();
+    LoadGeoJson();
 });
-	
+
 function LoadGeoJson() {
-    let offset = document.getElementById('date_event').value;
+    let offset = document.getElementById('date_range').value;
     let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
 
 	// recupere les checkboxes pour faire une liste des filtres actifs
@@ -75,9 +77,9 @@ function LoadGeoJson() {
 		map.on('click', 'events-hitbox', function (e) {
 			if (clicked === false) {
 				clicked = true; // evite le spam pendant qu'on fait des requetes
-				document.getElementById('date_event').style.display = "none";
+				document.getElementById('date_controls').style.display = "none";
 				
-				let offset = document.getElementById('date_event').value;
+				let offset = document.getElementById('date_range').value;
 				let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
 
 				const longitude = e.features[0].geometry.coordinates[0];
@@ -142,69 +144,90 @@ function LoadGeoJson() {
 }
 
 // bouton de fermeture des cards
-function CloseButton(){
-	document.getElementById('card_container').innerHTML = '<div class="fas fa-times" id="close_button"></div>';
-	
-    document.getElementById('close_button').addEventListener('click', function(e) {
-		map.flyTo({
-			center: [1, 47],
-			zoom: 5
-		});
+function CloseButton() {
+    document.getElementById('card_container').innerHTML = '<div class="fas fa-times" id="close_button"></div>';
+
+    document.getElementById('close_button').addEventListener('click', function () {
+        map.flyTo({
+            center: [1, 47],
+            zoom: 5
+        });
         document.getElementById('card_container').innerHTML = '';
-		document.getElementById('date_event').style.display = "unset";
-		document.getElementById('weather_container').style.display = "none";
+        document.getElementById('date_controls').style.display = "unset";
+        document.getElementById('weather_container').style.display = "none";
     });
 }
 
 //	recup la meteo depuis openweather
 function Meteo(lattitude, longitude, MaDate) {
-	document.getElementById('weather_container').style.display = "block";
-	
-	fetch('http://api.openweathermap.org/data/2.5/forecast?lat='+lattitude+'&lon='+longitude+'&appid=7e39eceace89a2eabd5786d8248a25bd&units=metric')
-		.then((res) => {
-			return res.json();
-		})
-		.then((data) => {
-			data.list.forEach(function(list_item) {
-				if(list_item.dt_txt === MaDate+' 18:00:00') {
-					document.getElementById('meteo').innerHTML = list_item.weather[0].main;
-					document.getElementById('temp').innerHTML = list_item.main.temp+' °C';
-					document.getElementById('hum').innerHTML = list_item.main.humidity+' %';
-				}
-			});
-		});
+    document.getElementById('weather_container').style.display = "block";
+
+    fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lattitude + '&lon=' + longitude + '&appid=7e39eceace89a2eabd5786d8248a25bd&units=metric')
+        .then((res) => {
+            return res.json();
+        })
+        .then((data) => {
+            data.list.forEach(function (list_item) {
+                if (list_item.dt_txt === MaDate + ' 18:00:00') {
+                    document.getElementById('meteo').innerHTML = list_item.weather[0].main;
+                    document.getElementById('temp').innerHTML = list_item.main.temp + ' °C';
+                    document.getElementById('hum').innerHTML = list_item.main.humidity + ' %';
+                }
+            });
+        });
 }
 
 // efface les layers avant d'en ajouter un nouveau
 function UnloadGeoJson() {
-	map.removeLayer('events-heat');
-	map.removeLayer('events-hitbox');
-	map.removeSource('events');
+    map.removeLayer('events-heat');
+    map.removeLayer('events-hitbox');
+    map.removeSource('events');
 }
 
 // deplace le date_label et affiche la date au dessus du range
-document.getElementById('date_event').addEventListener('mousemove', function(e) {
-	let offset = e.target.value;
+document.getElementById('date_range').addEventListener('mousemove', function (e) {
+    let offset = e.target.value;
     let MaDate = moment().add(parseInt(offset), 'days').format('D');
+
     document.getElementById('date_label').innerHTML = MaDate + ' Avril' + ' 2019'; // TODO : ENLEVER TRICHE
 	document.getElementById('date_label').style.left = e.pageX-150 + 'px';
 });
 
 // affiche le menu des filtres
-document.getElementById('filter_button').addEventListener('click', function(){
-	document.getElementById('filter_container').style.display = "block";
-	document.getElementById('map').style.filter = "blur(20px)";
-	document.getElementById('card_container').style.filter = "blur(10px)";
-	document.getElementById('weather_container').style.filter = "blur(10px)";
-	document.getElementById('date_event').style.display = "none";
-	UnloadGeoJson();
+document.getElementById('filter_button').addEventListener('click', function () {
+    document.getElementById('filter_container').style.display = "block";
+    document.getElementById('map').style.filter = "blur(20px)";
+    document.getElementById('card_container').style.filter = "blur(10px)";
+    document.getElementById('weather_container').style.filter = "blur(10px)";
+    document.getElementById('date_controls').style.display = "none";
 });
 // cache le menu des filtres
-document.getElementById('filter_confirm_button').addEventListener('click', function() {
-	LoadGeoJson();
-	document.getElementById('filter_container').style.display = "none";
-	document.getElementById('map').style.filter = "none";
-	document.getElementById('card_container').style.filter = "none";
-	document.getElementById('date_event').style.display = "unset";
-	document.getElementById('weather_container').style.filter = "none";
+document.getElementById('filter_confirm_button').addEventListener('click', function () {
+    UnloadGeoJson();
+    LoadGeoJson();
+    document.getElementById('filter_container').style.display = "none";
+    document.getElementById('map').style.filter = "none";
+    document.getElementById('card_container').style.filter = "none";
+    document.getElementById('date_controls').style.display = "unset";
+    document.getElementById('weather_container').style.filter = "none";
+});
+
+document.getElementById('play_button').addEventListener('click', function () {
+    if (document.getElementById('date_range').value >= 7) {
+        document.getElementById('date_range').value = 0;
+    }
+
+    document.getElementById('play_button').style.color = '#8E00BF';
+
+    if(playID === false) {
+        playID = window.setInterval(function () {
+            document.getElementById('date_range').value++;
+            UnloadGeoJson();
+            LoadGeoJson();
+            if (document.getElementById('date_range').value >= 7) {
+                document.getElementById('play_button').style.color = '#333';
+                window.clearInterval(playID);
+            }
+        }, 1000);
+    }
 });
