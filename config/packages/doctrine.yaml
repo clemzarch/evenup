@@ -3,7 +3,7 @@ parameters:
     # This allows you to run cache:warmup even if your
     # environment variables are not available yet.
     # You should not need to change this value.
-    env(DATABASE_URL): ''
+    env(DATABASE_URL): 'mysql://ba0c30c9da59a0:b6cb5613@us-cdbr-iron-east-03.cleardb.net/heroku_d6283b20d8ab06a?reconnect=true'
 
 doctrine:
     dbal:
