@@ -1,18 +1,18 @@
 @font-face {
 	font-family: Avenir-Light;
-	src: url(Avenir-Light-07.ttf);
+	src: url(../fonts/Avenir-Light-07.ttf);
 }
 @font-face {
     font-family: Avenir-Medium;
-    src: url(Avenir-Medium-09.ttf);
+    src: url(../fonts/Avenir-Medium-09.ttf);
 }
 @font-face {
 	font-family: Avenir-Heavy;
-	src: url(Avenir-Heavy-05.ttf);
+	src: url(../fonts/Avenir-Heavy-05.ttf);
 }
 @font-face {
     font-family: Avenir-Black;
-    src: url(Avenir-Black-03.ttf);
+    src: url(../fonts/Avenir-Black-03.ttf);
 }
 
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib,
@@ -25,6 +25,7 @@ body {
     margin:0;
     padding:0;
     font-family: Avenir-Light, sans-serif;
+	background: #222;
 }
 
 a {
@@ -92,6 +93,7 @@ input[type=range]::-webkit-slider-thumb {
 #card_container{
     position:fixed;
     top:70px;
+	bottom:0;
     right:0;
 	max-height:100%;
     overflow:auto;
@@ -129,7 +131,7 @@ details summary {
 	outline:none;
 	text-align: center;
 	background: #fff;
-	font-family: Avenir-Medium;
+	font-family: Avenir-Medium, sans-serif;
 	cursor:pointer;
 }
 details p{
@@ -146,8 +148,7 @@ details p{
     box-shadow: 0 3px 14pt #0003;
     z-index: 1;
     cursor: pointer;
-    height: 45px;
-	width: 45px;
+	width: 26px;
     text-align: center;
     transition-duration: 0.2s;
     display: block;
@@ -224,7 +225,7 @@ details p{
 	right:0;
 	background:#fff;
 	border-radius:360px;
-	margin:50pt;
+	margin:60pt;
 	padding: 19px;
     font-size: 19px;
     width: 19px;
@@ -232,7 +233,6 @@ details p{
 	box-shadow: 0 4px 10px #0005;
 	cursor: pointer;
 	color: #333;
-	width: 57px;
 }
 #filter_container {
 	display:none;
@@ -241,9 +241,9 @@ details p{
     left: 0;
     right: 0;
     bottom: 0;
-    background: #0004;
-    color: #fff;
+	color: #fff;
 	text-align: center;
+	background: #0004 url(../img/texture.png);
 }
 #filter_container h1 {
 	margin: 50px 0;
