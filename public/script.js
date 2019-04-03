@@ -28,7 +28,7 @@ function LoadGeoJson() {
 	console.log(active_filters);
 	
 	// recupere le geo-json d'apres la date et la liste de filtres actifs
-	fetch('/geo/'+MaDate+'/'+active_filters)
+	fetch('/geo/' + MaDate + '/' + active_filters)
 	.then((res) => {
 		return res.json();
 	})
@@ -74,7 +74,7 @@ function LoadGeoJson() {
 		});
 
 		map.on('click', 'events-hitbox', function (e) {
-			if(clicked === false) {
+			if (clicked === false) {
 				clicked = true; // evite le spam pendant qu'on fait des requetes
 				document.getElementById('date_event').style.display = "none";
 				document.getElementById('weather_container').style.display = "block";
@@ -93,7 +93,7 @@ function LoadGeoJson() {
 					})
 					.then((data) => {
 						data.list.forEach(function(list_item) {
-							if(list_item.dt_txt === MaDate+' 18:00:00') {
+							if(list_item.dt_txt === MaDate + ' 18:00:00') {
 								document.getElementById('meteo').innerHTML = list_item.weather[0].main;
 								document.getElementById('temp').innerHTML = list_item.main.temp+' °C';
 								document.getElementById('hum').innerHTML = list_item.main.humidity+' %';
@@ -103,10 +103,10 @@ function LoadGeoJson() {
 
 				// recup les infos de l'event sur notre BDD, affiche les cards
 				events_clicked = e.features;
-				for(var i = 0; i < events_clicked.length; i++) {
-					if(i > 10) {break}; // limite le nombre d'events à fetch
+				for (var i = 0; i < events_clicked.length; i++) {
+					if (i > 10) { break }; // limite le nombre d'events à fetch
 					
-					fetch('api/events/'+events_clicked[i].properties.id)
+					fetch('api/events/' + events_clicked[i].properties.id)
 						.then((res) => {
 							return res.json();
 						})
@@ -165,8 +165,8 @@ document.getElementById('date_event').addEventListener('mousedown', function() {
 document.getElementById('date_event').addEventListener('mousemove', function(e){
 	let offset = e.target.value;
     let MaDate = moment().add(parseInt(offset), 'days').format('D');
-    document.getElementById('date_label').innerHTML = MaDate+' Avril'; //TODO : ENLEVER TRICHE
-	document.getElementById('date_label').style.left = e.pageX-150 +'px';
+    document.getElementById('date_label').innerHTML = MaDate + ' Avril' + ' 2019'; // TODO : ENLEVER TRICHE
+	document.getElementById('date_label').style.left = e.pageX-150 + 'px';
 });
 
 // affiche le menu des filtres
