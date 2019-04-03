@@ -87,7 +87,7 @@ function LoadGeoJson() {
 				const lattitude = e.features[0].geometry.coordinates[1];
 				
 				//	recup la meteo depuis openweather
-				fetch('http://api.openweathermap.org/data/2.5/forecast?lat='+lattitude+'&lon='+longitude+'&appid=7e39eceace89a2eabd5786d8248a25bd&units=metric')
+				fetch('https://api.openweathermap.org/data/2.5/forecast?lat='+lattitude+'&lon='+longitude+'&appid=7e39eceace89a2eabd5786d8248a25bd&units=metric')
 					.then((res) => {
 						return res.json();
 					})
