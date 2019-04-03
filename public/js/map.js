@@ -83,7 +83,6 @@ function LoadGeoJson() {
 				const longitude = e.features[0].geometry.coordinates[0];
 				const lattitude = e.features[0].geometry.coordinates[1];
 				
-<<<<<<< HEAD:public/script.js
 				//	recup la meteo depuis openweather
 				fetch('https://api.openweathermap.org/data/2.5/forecast?lat='+lattitude+'&lon='+longitude+'&appid=7e39eceace89a2eabd5786d8248a25bd&units=metric')
 					.then((res) => {
@@ -99,8 +98,6 @@ function LoadGeoJson() {
 						});
 					});
 
-=======
->>>>>>> 26a838c1dddbdde17912b42a3a50c130e9252617:public/js/map.js
 				// recup les infos de l'event sur notre BDD, affiche les cards
 				events_clicked = e.features;
 				for (var i = 0; i < events_clicked.length; i++) {
