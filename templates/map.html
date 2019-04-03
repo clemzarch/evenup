@@ -4,50 +4,49 @@
     <meta charset='utf-8'>
     <title>Evenup</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>
-	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet'>
-
-	<!-- Fontawesome v5 -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-
-	<!-- Favicon Even'up -->
-	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/evenup_favicon.png') }}">
-
-	<!-- Custom styles for this template -->
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet'>
+    <!-- Fontawesome v5 -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Favicon Even'up -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/evenup_favicon.png') }}">
+    <!-- Custom styles for this template -->
     <link href='css/map.css' rel='stylesheet'>
 </head>
 <body>
 <div id='map'>
-	<nav class="evenup-nav the-blur">
-		<ul>
-			<img src="img/evenup3_logo.svg" alt="logo evenup"></img>
-			<li><a href="/event/new">Ajouter un événement</a></li>
-			<li><a class="active" href="/map.html">Voir les événements</a></li>
-		</ul>
-	</nav>
+    <nav class="evenup-nav the-blur">
+        <ul>
+            <img src="img/evenup3_logo.svg" alt="logo evenup">
+            <li><a href="/event/new">Ajouter un événement</a></li>
+            <li><a class="active" href="/map.html">Voir les événements</a></li>
+        </ul>
+    </nav>
 </div>
-<div style="position:fixed">
+<div id="date_controls" style="position:fixed">
     <label id="date_label"></label>
-    <input type="range" id="date_event" min="0" max="7">
+    <input type="range" id="date_range" min="0" max="7">
+    <div id="filter_button" class="fas fa-sliders-h"></div>
+    <div id="play_button" class="fas fa-play"></div>
 </div>
+
 <div id="weather_container">
-	<div class="weather" id="meteo"></div>
-	<div class="weather" id="temp"></div>
-	<div class="weather" id="hum"></div>
+    <div class="weather" id="meteo"></div>
+    <div class="weather" id="temp"></div>
+    <div class="weather" id="hum"></div>
 </div>
 <div id="card_container"></div>
 
-<div id="filter_button" class="fas fa-sliders-h"></div>
 <div id="filter_container">
-	<div id="filter_confirm_button" class="fas fa-chevron-right"></div>
-	<h1>Filtres</h1>
-	<form>
-		<label>Bar<input checked id="activity" type="checkbox"></input><span class="checkmark"></span></label>
-		<label>Discotèques<input checked id="filt_2" type="checkbox"><span class="checkmark"></span></input></label>
-		<label>Festival<input checked id="filt_3" type="checkbox"></input><span class="checkmark"></span></label>
-		<label>Concert<input checked id="filt_4" type="checkbox"></input><span class="checkmark"></span></label>
-		<label>Repas<input checked id="filt_5" type="checkbox"></input><span class="checkmark"></span></label>
-		<label>Spectacles<input checked id="filt_6" type="checkbox"></input><span class="checkmark"></span></label>
-	</form>
+    <div id="filter_confirm_button" class="fas fa-chevron-right"></div>
+    <h1>Filtres</h1>
+    <form>
+        <label>Bar<input checked id="activity" type="checkbox"><span class="checkmark"></span></label>
+        <label>Discotèques<input checked id="filt_2" type="checkbox"><span class="checkmark"></span></label>
+        <label>Festival<input checked id="filt_3" type="checkbox"><span class="checkmark"></span></label>
+        <label>Concert<input checked id="filt_4" type="checkbox"><span class="checkmark"></span></label>
+        <label>Repas<input checked id="filt_5" type="checkbox"><span class="checkmark"></span></label>
+        <label>Spectacles<input checked id="filt_6" type="checkbox"><span class="checkmark"></span></label>
+    </form>
 </div>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
