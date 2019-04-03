@@ -273,7 +273,7 @@ details p {
 
 #filter_container form {
     border-top: 1px solid #bbb;
-    padding-top: 50px;
+    padding: 50px 40pt 0 40pt;
     text-align: left;
     margin: auto;
     max-width: 300pt;
@@ -314,7 +314,7 @@ details p {
 
 /* When the checkbox is checked, add a blue background */
 #filter_container form label input:checked ~ .checkmark {
-    background-color: #000;
+    background: none;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
