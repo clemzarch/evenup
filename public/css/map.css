@@ -54,11 +54,10 @@ a {
 }
 
 #date_controls:active #date_label {
-    display: block;
+    display: unset;
 }
 
 #date_controls {
-    width: 100%;
     bottom: 45pt;
     left: 0;
     right: 0;
@@ -232,12 +231,13 @@ details p {
     background: #fff;
     border-radius: 360px;
     margin: 60pt;
-    padding: 19px;
-    font-size: 19px;
-	width:19px;
-	height:19px;
+    padding: 16px;
+    font-size: 16px;
     box-shadow: 0 4px 10px #0005;
     cursor: pointer;
+    color: #333;
+	width: 16px;
+    height: 16px;
 }
 
 #filter_confirm_button {
@@ -247,13 +247,13 @@ details p {
     background: #fff;
     border-radius: 360px;
     margin: 60pt;
-    padding: 19px;
-    font-size: 19px;
-    width:19px;
-	height:19px;
+    padding: 16px;
+    font-size: 16px;
     box-shadow: 0 4px 10px #0005;
     cursor: pointer;
     color: #333;
+	width: 16px;
+    height: 16px;
 }
 
 #filter_container {
@@ -344,17 +344,23 @@ details p {
 /* avancer dans la timeline */
 #play_button {
     position: fixed;
-    bottom: 0;
-    left: 0;
+    bottom: 60px;
+    right: 0;
     background: #fff;
     border-radius: 360px;
     margin: 60pt;
-    padding: 19px;
-    font-size: 19px;
-	width:19px;
-	height:19px;
+    padding: 16px;
+    font-size: 16px;
     box-shadow: 0 4px 10px #0005;
     cursor: pointer;
+	color: #333;
+	width: 16px;
+    height: 16px;
+}
+
+@keyframes playing {
+	0% {background: #d846ca;color:#fff}
+	100% {background: #8E00BF;color:#fff}
 }
 
 /* blocs meteo */
@@ -530,4 +536,27 @@ details p {
         bottom: 10px;
         top: unset;
     }
+	
+	.evenup-nav {
+		height:50px;
+	}
+	
+	#date_controls {
+		position:fixed;
+		left: 0;
+		right: 75px;
+		bottom: 5%;
+	}
+	
+	#filter_button {
+		margin: 16px;
+	}
+	
+	#filter_confirm_button {
+		margin: 16px;
+	}
+	
+	#play_button { 
+		margin: 16px;
+	}
 }
