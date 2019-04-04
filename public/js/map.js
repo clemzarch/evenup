@@ -9,12 +9,16 @@ let map = new mapboxgl.Map({
 LoadGeoJson();
 
 document.getElementById('date_range').addEventListener('change', function () {
-	console.log('mouseup');
-    UnloadGeoJson();
     LoadGeoJson();
 });
 
 function LoadGeoJson() {
+	if(typeof map.getLayer('events-heat') !== 'undefined') {
+		map.removeLayer('events-heat');
+		map.removeLayer('events-hitbox');
+		map.removeSource('events');
+	}
+
     let offset = document.getElementById('date_range').value;
     let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
 
@@ -162,19 +166,12 @@ function Meteo(lattitude, longitude, MaDate) {
         });
 }
 
-// efface les layers avant d'en ajouter un nouveau
-function UnloadGeoJson() {
-    map.removeLayer('events-heat');
-    map.removeLayer('events-hitbox');
-    map.removeSource('events');
-}
-
 // deplace le date_label et affiche la date au dessus du range
 document.getElementById('date_range').addEventListener('mousemove', function (e) {
     let offset = e.target.value;
     let MaDate = moment().add(parseInt(offset), 'days').format('D');
 
-    document.getElementById('date_label').innerHTML = MaDate + ' Avril' + ' 2019'; // TODO : ENLEVER TRICHE
+    document.getElementById('date_label').innerHTML = MaDate + ' Avril'; // TODO : ENLEVER TRICHE
 	document.getElementById('date_label').style.left = e.pageX-150 + 'px';
 });
 
@@ -188,7 +185,6 @@ document.getElementById('filter_button').addEventListener('click', function () {
 });
 // cache le menu des filtres
 document.getElementById('filter_confirm_button').addEventListener('click', function () {
-    UnloadGeoJson();
     LoadGeoJson();
     document.getElementById('filter_container').style.display = "none";
     document.getElementById('map').style.filter = "none";
@@ -197,22 +193,26 @@ document.getElementById('filter_confirm_button').addEventListener('click', funct
     document.getElementById('weather_container').style.filter = "none";
 });
 
+// appui sur le bouton d'avance de la timeline
 document.getElementById('play_button').addEventListener('click', function () {
     if (document.getElementById('date_range').value >= 7) {
         document.getElementById('date_range').value = 0;
     }
-
-    document.getElementById('play_button').style.color = '#8E00BF';
-
-    if(playID === false) {
+	
+    if(typeof playID === 'undefined') { // si c'est pas en lecture
+		document.getElementById('play_button').style.animation = 'playing 1s infinite';
         playID = window.setInterval(function () {
             document.getElementById('date_range').value++;
-            UnloadGeoJson();
             LoadGeoJson();
-            if (document.getElementById('date_range').value >= 7) {
-                document.getElementById('play_button').style.color = '#333';
+            if (document.getElementById('date_range').value >= 7) { // arrivé qu bout de 7 jours
+                document.getElementById('play_button').style.animation = 'playing 1s infinite';
                 window.clearInterval(playID);
+				delete playID;
             }
         }, 1000);
-    }
+    } else { // c'est en lecture ? on arrete.
+		document.getElementById('play_button').style.animation = 'unset';
+		window.clearInterval(playID);
+		delete playID;
+	}
 });
