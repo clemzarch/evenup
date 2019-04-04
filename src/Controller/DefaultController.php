@@ -13,14 +13,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
-	private $em;
+    private $em;
 
     public function __construct(
         EntityManagerInterface $em
-    ) {
+    )
+    {
         $this->em = $em;
     }
-	
+
     /**
      * @Route("/", name="map")
      */
@@ -28,68 +29,66 @@ class DefaultController extends AbstractController
     {
         return $this->render('map.html');
     }
-	
-	/**
-	 * @Route("/geo/{date}/{filters}", name="geo_json", methods={"GET"})
+
+    /**
+     * @Route("/geo/{date}/{filters}", name="geo_json", methods={"GET"})
      */
     public function geo($date, $filters)
     {
-		$repository = $this->em->getRepository(Event::class);
+        $date = (string)$date;
 
-		$date = (string)$date;
-		
-		$types = (array)explode(',', $filters);
-	
-		$events = $this->em->createQueryBuilder()
-			->select('event.id', 'event.longitude', 'event.latitude')
-			->from(Event::class, 'event')
-			->where('event.date LIKE :date')
-			->andWhere('event.activityType IN (:types)')
-			->groupBy('event.title')
-			->setParameter('date', '%'.$date.'%')
-			->setParameter('types', $types)
-			->getQuery()
-			->getArrayResult();
+        $types = (array)explode(',', $filters);
 
-		$response = '';
+        $events = $this->em->createQueryBuilder()
+            ->select('event.id', 'event.longitude', 'event.latitude')
+            ->from(Event::class, 'event')
+            ->where('event.date LIKE :date')
+            ->andWhere('event.activityType IN (:types)')
+            ->groupBy('event.title')
+            ->setParameter('date', '%' . $date . '%')
+            ->setParameter('types', $types)
+            ->getQuery()
+            ->getArrayResult();
 
-		$c = count($events);
+        $response = '';
 
-		foreach ($events as $i => $event) {
-			if($event['longitude'] != null) {
-				$response .= '{
+        $c = count($events);
+
+        foreach ($events as $i => $event) {
+            if ($event['longitude'] != null) {
+                $response .= '{
 								"type":"Feature",
 								"properties":{
-									"id":"'.$event['id'].'"
+									"id":"' . $event['id'] . '"
 								},
 								"geometry":{
 									"type":"Point",
 									"coordinates":
 									[
-										'.$event['longitude'].',
-										'.$event['latitude'].'
+										' . $event['longitude'] . ',
+										' . $event['latitude'] . '
 									]
 								}
 							}';
 
-				if ($i + 1 != $c){ // si c'est pas le dernier event, on une virgule
-					$response = $response.', ';
-				}
-			}
-		}
-		
-		$response = '{
+                if ($i + 1 != $c) { // si c'est pas le dernier event, on une virgule
+                    $response = $response . ', ';
+                }
+            }
+        }
+
+        $response = '{
 			"type": "FeatureCollection",
 			"crs": {
 				"type": "name",
 				"properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
 			},
-			"features": ['.$response.']
+			"features": [' . $response . ']
 		}';
-		
-		$response = new Response($response);
-		$response->headers->set('Content-Type', 'application/json');
 
-		return $response;
+        $response = new Response($response);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 }
