@@ -83,7 +83,11 @@ class MapadoCommand extends ContainerAwareCommand
 						$event->setFormattedAddress($mapado['hydra:member'][$i]['address']['formattedAddress']);
 						$event->setCity($mapado['hydra:member'][$i]['address']['city']);
 						$event->setLocale($mapado['hydra:member'][$i]['locale']);
-						$event->setActivityType($mapado['hydra:member'][$i]['activityType']);
+						// $event->setActivityType($mapado['hydra:member'][$i]['activityType']);
+						
+						$types = ['bar', 'discotheque', 'festival', 'concert', 'repas', 'spectacles'];
+						$event->setActivityType($types[mt_rand(0, 5)]);
+						
 						$event->setDescription($mapado['hydra:member'][$i]['description']);
 
 						$this->em->persist($event);						

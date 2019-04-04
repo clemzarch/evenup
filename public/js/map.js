@@ -13,12 +13,6 @@ document.getElementById('date_range').addEventListener('change', function () {
 });
 
 function LoadGeoJson() {
-	if(typeof map.getLayer('events-heat') !== 'undefined') {
-		map.removeLayer('events-heat');
-		map.removeLayer('events-hitbox');
-		map.removeSource('events');
-	}
-
     let offset = document.getElementById('date_range').value;
     let MaDate = moment().add(parseInt(offset), 'days').format('YYYY-MM-DD');
 
@@ -38,6 +32,11 @@ function LoadGeoJson() {
 		return res.json();
 	})
 	.then((data) => {
+		if(typeof map.getSource('events') !== 'undefined') { // efface les anciennes sources
+			map.removeLayer('events-hitbox');
+			map.removeLayer('events-heat');
+			map.removeSource('events');
+		}
 		map.addSource('events', {
 			"type": "geojson",
 			"data": data
@@ -164,7 +163,6 @@ function CloseButton() {
 
 //	recup la meteo depuis openweather
 function Meteo(lattitude, longitude, MaDate) {
-    document.getElementById('weather_container').style.display = "block";
 
     fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lattitude + '&lon=' + longitude + '&appid=7e39eceace89a2eabd5786d8248a25bd&units=metric')
         .then((res) => {
@@ -173,6 +171,7 @@ function Meteo(lattitude, longitude, MaDate) {
         .then((data) => {
             data.list.forEach(function (list_item) {
                 if (list_item.dt_txt === MaDate + ' 18:00:00') {
+					document.getElementById('weather_container').style.display = "block";
                     document.getElementById('meteo').innerHTML = list_item.weather[0].main;
                     document.getElementById('temp').innerHTML = list_item.main.temp + ' °C';
                     document.getElementById('hum').innerHTML = list_item.main.humidity + ' %';
@@ -183,19 +182,17 @@ function Meteo(lattitude, longitude, MaDate) {
 
 // deplace le date_label et affiche la date au dessus du range
 document.getElementById('date_range').addEventListener('mousemove', function (e) {
-    let offset = e.target.value;
-    let MaDate = moment().add(parseInt(offset), 'days').format('D');
+	let offset = e.target.value;
+	let MaDate = moment().add(parseInt(offset), 'days').format('D');
 
-    document.getElementById('date_label').innerHTML = MaDate + ' Avril'; // TODO : ENLEVER TRICHE
+	document.getElementById('date_label').innerHTML = MaDate + ' Avril'; // TODO : ENLEVER TRICHE
 	document.getElementById('date_label').style.left = e.pageX-150 + 'px';
 });
 
 // affiche le menu des filtres
 document.getElementById('filter_button').addEventListener('click', function () {
     document.getElementById('filter_container').style.display = "block";
-    document.getElementById('map').style.filter = "blur(20px)";
-    document.getElementById('card_container').style.filter = "blur(10px)";
-    document.getElementById('weather_container').style.filter = "blur(10px)";
+    document.getElementById('map').style.filter = "blur(10px)";
     document.getElementById('date_controls').style.display = "none";
 });
 // cache le menu des filtres
@@ -203,9 +200,7 @@ document.getElementById('filter_confirm_button').addEventListener('click', funct
     LoadGeoJson();
     document.getElementById('filter_container').style.display = "none";
     document.getElementById('map').style.filter = "none";
-    document.getElementById('card_container').style.filter = "none";
     document.getElementById('date_controls').style.display = "unset";
-    document.getElementById('weather_container').style.filter = "none";
 });
 
 // appui sur le bouton d'avance de la timeline
@@ -220,7 +215,7 @@ document.getElementById('play_button').addEventListener('click', function () {
             document.getElementById('date_range').value++;
             LoadGeoJson();
             if (document.getElementById('date_range').value >= 7) { // arrivé qu bout de 7 jours
-                document.getElementById('play_button').style.animation = 'playing 1s infinite';
+                document.getElementById('play_button').style.animation = 'unset';
                 window.clearInterval(playID);
 				delete playID;
             }
