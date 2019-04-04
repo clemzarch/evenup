@@ -30,7 +30,7 @@ class DefaultController extends AbstractController
     }
 	
 	/**
-* @Route("/geo/{date}/{filters}", name="geo_json", methods={"GET"})
+	 * @Route("/geo/{date}/{filters}", name="geo_json", methods={"GET"})
      */
     public function geo($date, $filters)
     {
@@ -38,12 +38,16 @@ class DefaultController extends AbstractController
 
 		$date = (string)$date;
 		
+		$types = (array)explode(',', $filters);
+	
 		$events = $this->em->createQueryBuilder()
 			->select('event.id', 'event.longitude', 'event.latitude')
 			->from(Event::class, 'event')
 			->where('event.date LIKE :date')
+			->andWhere('event.activityType IN (:types)')
 			->groupBy('event.title')
 			->setParameter('date', '%'.$date.'%')
+			->setParameter('types', $types)
 			->getQuery()
 			->getArrayResult();
 

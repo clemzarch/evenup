@@ -56,6 +56,10 @@ class EventbriteCommand extends ContainerAwareCommand
                     $event->setTitle($d->events[$i]->name->text);
                     $event->setDescription(trim($d->events[$i]->description->text));
                     $event->setDate($date_auj);
+					
+					$types = ['bar', 'discotheque', 'festival', 'concert', 'repas', 'spectacles'];
+					$event->setActivityType($types[mt_rand(0, 5)]);
+					
                     $this->em->persist($event);
                 }
             }
