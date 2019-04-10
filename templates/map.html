@@ -16,20 +16,22 @@
 <body>
 
 <div id='map'>
+    <!-- NAVBAR -->
     <nav class="evenup-nav">
         <ul>
-            
             <img src="img/evenup3_logo.svg" alt="logo evenup">
             <li><a href="/event/new">Ajouter un événement</a></li>
             <li><a class="active" href="/map.html">Voir les événements</a></li>
             <button class="dropdown"><i class="fas fa-bars"></i></button>
 		</ul>	
     </nav>
-            <div class="submenu">
-                <li><a href="/event/new">Ajouter un événement</a></li>
-                <li><a class="active" href="/map.html">Voir les événements</a></li>
-            </div>        
+    <!-- DROPDOWN TOGGLE ON LOW SIZE -->
+    <div class="submenu" style="display: none;">
+        <li><a href="/event/new">Ajouter un événement</a></li>
+        <li><a class="active" href="/map.html">Voir les événements</a></li>
+    </div>        
 </div>
+
 <div id="date_controls">
     <label id="date_label"></label>
     <input value="0" type="range" id="date_range" min="0" max="7">
@@ -63,13 +65,12 @@
 <script src="js/map.js"></script>
 
 <script>
-
-// Bouton Navbar
-$(document).ready(function() {
-	$(".dropdown").click(function() {
-		$(".submenu").stop().slideToggle();
-	});
-});
+    // Bouton Navbar
+    $(document).ready(function() {;
+        $(".dropdown").click(function() {
+            $(".submenu").stop().slideToggle();
+        });
+    });
 </script>
 </body>
 </html>

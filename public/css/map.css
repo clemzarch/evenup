@@ -538,10 +538,6 @@ details p {
         top: unset;
     }
 	
-	.evenup-nav {
-		height:50px;
-	}
-	
 	#date_controls {
 		position:fixed;
 		left: 10px;
